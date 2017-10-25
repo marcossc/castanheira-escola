@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template_dashgum.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditAnoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2" columnClasses="firstColumn,secondColumn">
+                    <h:outputLabel value="#{bundle.EditAnoLabel_id}" for="id" class="control-label"/>
+                    <h:inputText id="id" value="#{anoController.selected.id}" title="#{bundle.EditAnoTitle_id}" required="true" requiredMessage="#{bundle.EditAnoRequiredMessage_id}" disabled="true" class="form-control" />
+                    <h:outputLabel value="#{bundle.EditAnoLabel_ano}" for="ano" class="control-label"/>
+                    <h:inputText id="ano" value="#{anoController.selected.ano}" title="#{bundle.EditAnoTitle_ano}" required="true" requiredMessage="#{bundle.EditAnoRequiredMessage_ano}" class="form-control"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{anoController.update}" value="#{bundle.EditAnoSaveLink}" class="btn btn-primary"/>
+                <h:commandLink action="#{anoController.prepareList}" value="#{bundle.EditAnoShowAllLink}" immediate="true" class="btn btn-default"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

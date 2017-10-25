@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditBoletimTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditBoletimLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{boletimController.selected.id}" title="#{bundle.EditBoletimTitle_id}" required="true" requiredMessage="#{bundle.EditBoletimRequiredMessage_id}" disabled/>
+                    <h:outputLabel value="#{bundle.EditBoletimLabel_nota1}" for="nota1" />
+                    <h:inputText id="nota1" value="#{boletimController.selected.nota1}" title="#{bundle.EditBoletimTitle_nota1}" />
+                    <h:outputLabel value="#{bundle.EditBoletimLabel_falta1}" for="falta1" />
+                    <h:inputText id="falta1" value="#{boletimController.selected.falta1}" title="#{bundle.EditBoletimTitle_falta1}" />
+                    <h:outputLabel value="#{bundle.EditBoletimLabel_nota2}" for="nota2" />
+                    <h:inputText id="nota2" value="#{boletimController.selected.nota2}" title="#{bundle.EditBoletimTitle_nota2}" />
+                    <h:outputLabel value="#{bundle.EditBoletimLabel_falta2}" for="falta2" />
+                    <h:inputText id="falta2" value="#{boletimController.selected.falta2}" title="#{bundle.EditBoletimTitle_falta2}" />
+                    <h:outputLabel value="#{bundle.EditBoletimLabel_nota3}" for="nota3" />
+                    <h:inputText id="nota3" value="#{boletimController.selected.nota3}" title="#{bundle.EditBoletimTitle_nota3}" />
+                    <h:outputLabel value="#{bundle.EditBoletimLabel_falta3}" for="falta3" />
+                    <h:inputText id="falta3" value="#{boletimController.selected.falta3}" title="#{bundle.EditBoletimTitle_falta3}" />
+                    <h:outputLabel value="#{bundle.EditBoletimLabel_media}" for="media" />
+                    <h:inputText id="media" value="#{boletimController.selected.media}" title="#{bundle.EditBoletimTitle_media}" />
+                    <h:outputLabel value="#{bundle.EditBoletimLabel_totalFalta}" for="totalFalta" />
+                    <h:inputText id="totalFalta" value="#{boletimController.selected.totalFalta}" title="#{bundle.EditBoletimTitle_totalFalta}" />
+                    <h:outputLabel value="#{bundle.EditBoletimLabel_idDisciplina}" for="idDisciplina" />
+                    <h:selectOneMenu id="idDisciplina" value="#{boletimController.selected.idDisciplina}" title="#{bundle.EditBoletimTitle_idDisciplina}" required="true" requiredMessage="#{bundle.EditBoletimRequiredMessage_idDisciplina}">
+                        <f:selectItems value="#{disciplinaController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditBoletimLabel_idMatricula}" for="idMatricula" />
+                    <h:selectOneMenu id="idMatricula" value="#{boletimController.selected.idMatricula}" title="#{bundle.EditBoletimTitle_idMatricula}" required="true" requiredMessage="#{bundle.EditBoletimRequiredMessage_idMatricula}">
+                        <f:selectItems value="#{matriculaController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{boletimController.update}" value="#{bundle.EditBoletimSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditBoletimViewLink}"/>
+                <br />
+                <h:commandLink action="#{boletimController.prepareList}" value="#{bundle.EditBoletimShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditBoletimIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

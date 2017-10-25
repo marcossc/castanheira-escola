@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateProfessorDiscTurTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateProfessorDiscTurLabel_idDisciplina}" for="idDisciplina" />
+                    <h:selectOneMenu id="idDisciplina" value="#{professorDiscTurController.selected.idDisciplina}" title="#{bundle.CreateProfessorDiscTurTitle_idDisciplina}" >
+                        <f:selectItems value="#{disciplinaController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateProfessorDiscTurLabel_idProfessor}" for="idProfessor" />
+                    <h:selectOneMenu id="idProfessor" value="#{professorDiscTurController.selected.idProfessor}" title="#{bundle.CreateProfessorDiscTurTitle_idProfessor}" >
+                        <f:selectItems value="#{professorController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateProfessorDiscTurLabel_idTurma}" for="idTurma" />
+                    <h:selectOneMenu id="idTurma" value="#{professorDiscTurController.selected.idTurma}" title="#{bundle.CreateProfessorDiscTurTitle_idTurma}" >
+                        <f:selectItems value="#{turmaController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{professorDiscTurController.create}" value="#{bundle.CreateProfessorDiscTurSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{professorDiscTurController.prepareList}" value="#{bundle.CreateProfessorDiscTurShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateProfessorDiscTurIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

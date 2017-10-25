@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template_dashgum.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditMatriculaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form class="form-horizontal style-form">
+                <h:panelGrid columns="2" columnClasses="firstColumn,secondColumn">
+                    <h:outputLabel value="#{bundle.EditMatriculaLabel_id}" for="id" class="control-label" />
+                    <h:inputText id="id" value="#{matriculaController.selected.id}" title="#{bundle.EditMatriculaTitle_id}" required="true" requiredMessage="#{bundle.EditMatriculaRequiredMessage_id}" disabled="true" class="form-control"/>
+                    <h:outputLabel value="#{bundle.EditMatriculaLabel_aprovado}" for="aprovado" class="control-label" />
+                    <h:selectOneRadio id="aprovado" value="#{matriculaController.selected.aprovado}" title="#{bundle.EditMatriculaTitle_aprovado}" disabled="true" class="form-control" style="width:200px">
+                        <f:selectItem itemLabel="Não" itemValue="false" />
+                        <f:selectItem itemLabel="Sim" itemValue="true" />
+                    </h:selectOneRadio>
+                    <h:outputLabel value="#{bundle.EditMatriculaLabel_idAluno}" for="idAluno" class="control-label" />
+                    <h:selectOneMenu id="idAluno" value="#{matriculaController.selected.idAluno}" title="#{bundle.EditMatriculaTitle_idAluno}" class="form-control" >
+                        <f:selectItems value="#{alunoController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditMatriculaLabel_idTurma}" for="idTurma" class="control-label" />
+                    <h:selectOneMenu id="idTurma" value="#{matriculaController.selected.idTurma}" title="#{bundle.EditMatriculaTitle_idTurma}" class="form-control" >
+                        <f:selectItems value="#{turmaController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{matriculaController.update}" value="#{bundle.EditMatriculaSaveLink}" class="btn btn-primary"/>
+                <h:commandLink action="#{matriculaController.prepareList}" value="#{bundle.EditMatriculaShowAllLink}" immediate="true" class="btn btn-default"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

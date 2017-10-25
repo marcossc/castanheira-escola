@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template_dashgum.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateProfessorTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form class="form-horizontal style-form">
+                <h:panelGrid columns="2" columnClasses="firstColumn,secondColumn">
+                    <h:outputLabel value="#{bundle.CreateProfessorLabel_nome}" for="nome" class="control-label" />
+                    <h:inputText id="nome" value="#{professorController.selected.nome}" title="#{bundle.CreateProfessorTitle_nome}" required="true" requiredMessage="#{bundle.CreateProfessorRequiredMessage_nome}" class="form-control"/>
+                    <h:outputLabel value="#{bundle.CreateProfessorLabel_usuario}" for="usuario" class="control-label" />
+                    <h:inputText id="usuario" value="#{professorController.selected.usuario}" title="#{bundle.CreateProfessorTitle_usuario}" required="true" requiredMessage="#{bundle.CreateProfessorRequiredMessage_usuario}" class="form-control"/>
+                    <h:outputLabel value="#{bundle.CreateProfessorLabel_senha}" for="senha" class="control-label" />
+                    <h:inputText id="senha" value="#{professorController.selected.senha}" title="#{bundle.CreateProfessorTitle_senha}" required="true" requiredMessage="#{bundle.CreateProfessorRequiredMessage_senha}" class="form-control"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink value="#{bundle.CreateProfessorSaveLink}" action="#{professorController.create}" class="btn btn-primary"/>
+                <h:commandLink value="#{bundle.CreateProfessorShowAllLink}" action="#{professorController.prepareList}"  immediate="true" class="btn btn-default"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

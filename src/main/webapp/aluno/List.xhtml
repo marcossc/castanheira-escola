@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template_dashgum.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListAlunoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListAlunoEmpty}" rendered="#{alunoController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{alunoController.items.rowCount > 0}">
+                    <h:outputText value="#{alunoController.pagination.pageFirstItem + 1} a #{alunoController.pagination.pageLastItem + 1} de #{alunoController.pagination.itemsCount}"/>&nbsp;
+                    <br />
+                    <h:commandLink action="#{alunoController.previous}" value="#{bundle.Previous} #{alunoController.pagination.pageSize}" rendered="#{alunoController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{alunoController.next}" value="#{bundle.Next} #{alunoController.pagination.pageSize}" rendered="#{alunoController.pagination.hasNextPage}"/>&nbsp;
+                    <div class="content-panel">
+                        <h:dataTable value="#{alunoController.items}" var="item" styleClass="table table-striped table-advance table-hover">
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListAlunoTitle_id}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.id}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListAlunoTitle_nome}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.nome}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListAlunoTitle_dtNascimento}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.dtNascimento}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                </h:outputText>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListAlunoTitle_laudado}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.laudadoString}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListAlunoTitle_situacao}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.situacaoString}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListAlunoTitle_idAno}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.idAnoString}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Detalhes"/>
+                                </f:facet>
+                                <h:commandLink action="#{alunoController.prepareView}" styleClass="btn btn-success btn-xs">
+                                    <span class="glyphicon glyphicon-zoom-in"></span>
+                                </h:commandLink>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Editar"/>
+                                </f:facet>
+                                <h:commandLink action="#{alunoController.prepareEdit}" styleClass="btn btn-primary btn-xs">
+                                    <span class="glyphicon glyphicon-pencil"></span>
+                                </h:commandLink>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Remover"/>
+                                </f:facet>
+                                <h:commandLink action="#{alunoController.destroy}" styleClass="btn btn-danger btn-xs">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </h:commandLink>
+                            </h:column>
+                        </h:dataTable>
+                    </div>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{alunoController.prepareCreate}" value="#{bundle.ListAlunoCreateLink}" class="btn btn-default"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

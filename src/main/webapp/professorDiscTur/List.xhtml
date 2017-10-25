@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListProfessorDiscTurTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListProfessorDiscTurEmpty}" rendered="#{professorDiscTurController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{professorDiscTurController.items.rowCount > 0}">
+                    <h:outputText value="#{professorDiscTurController.pagination.pageFirstItem + 1}..#{professorDiscTurController.pagination.pageLastItem + 1}/#{professorDiscTurController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{professorDiscTurController.previous}" value="#{bundle.Previous} #{professorDiscTurController.pagination.pageSize}" rendered="#{professorDiscTurController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{professorDiscTurController.next}" value="#{bundle.Next} #{professorDiscTurController.pagination.pageSize}" rendered="#{professorDiscTurController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{professorDiscTurController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListProfessorDiscTurTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListProfessorDiscTurTitle_idDisciplina}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idDisciplina.nome}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListProfessorDiscTurTitle_idProfessor}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idProfessor.nome}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListProfessorDiscTurTitle_idTurma}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idTurma.nome}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{professorDiscTurController.prepareView}" value="#{bundle.ListProfessorDiscTurViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{professorDiscTurController.prepareEdit}" value="#{bundle.ListProfessorDiscTurEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{professorDiscTurController.destroy}" value="#{bundle.ListProfessorDiscTurDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{professorDiscTurController.prepareCreate}" value="#{bundle.ListProfessorDiscTurCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListProfessorDiscTurIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
