@@ -192,6 +192,11 @@ public class BoletimController implements Serializable {
         return ejbFacade.find(id);
     }
 
+    public String geraXML() {
+        ejbFacade.GeraXMLBoletim();
+        return "List";
+    }
+
     @FacesConverter(forClass = Boletim.class)
     public static class BoletimControllerConverter implements Converter {
 
