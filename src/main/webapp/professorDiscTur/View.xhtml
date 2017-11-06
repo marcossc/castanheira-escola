@@ -5,7 +5,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <ui:composition template="/template.xhtml">
+    <ui:composition template="/template_dashgum.xhtml">
         <ui:define name="title">
             <h:outputText value="#{bundle.ViewProfessorDiscTurTitle}"></h:outputText>
         </ui:define>
@@ -14,29 +14,38 @@
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
             <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputText value="#{bundle.ViewProfessorDiscTurLabel_id}"/>
-                    <h:outputText value="#{professorDiscTurController.selected.id}" title="#{bundle.ViewProfessorDiscTurTitle_id}"/>
-                    <h:outputText value="#{bundle.ViewProfessorDiscTurLabel_idDisciplina}"/>
-                    <h:outputText value="#{professorDiscTurController.selected.idDisciplina.nome}" title="#{bundle.ViewProfessorDiscTurTitle_idDisciplina}"/>
-                    <h:outputText value="#{bundle.ViewProfessorDiscTurLabel_idProfessor}"/>
-                    <h:outputText value="#{professorDiscTurController.selected.idProfessor.nome}" title="#{bundle.ViewProfessorDiscTurTitle_idProfessor}"/>
-                    <h:outputText value="#{bundle.ViewProfessorDiscTurLabel_idTurma}"/>
-                    <h:outputText value="#{professorDiscTurController.selected.idTurma.nome}" title="#{bundle.ViewProfessorDiscTurTitle_idTurma}"/>
-                </h:panelGrid>
+                <div class="content-panel">
+                    <table class="table table-striped table-advance table-hover">
+                        <thead><th>Dado</th>
+                            <th>Valor</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="width: 30%"><h:outputText value="#{bundle.ViewProfessorDiscTurLabel_id}" class="control-label"/></td>
+                                <td><h:outputText value="#{professorDiscTurController.selected.id}" title="#{bundle.ViewProfessorDiscTurTitle_id}" class="control-label"/></td>
+                            </tr>
+                            <tr>
+                                <td><h:outputText value="#{bundle.ViewProfessorDiscTurLabel_idDisciplina}" class="control-label"/></td>
+                                <td><h:outputText value="#{professorDiscTurController.selected.idDisciplina.nome}" title="#{bundle.ViewProfessorDiscTurTitle_idDisciplina}" class="control-label"/></td>
+                            </tr>
+                            <tr>
+                                <td><h:outputText value="#{bundle.ViewProfessorDiscTurLabel_idProfessor}" class="control-label"/></td>
+                                <td><h:outputText value="#{professorDiscTurController.selected.idProfessor.nome}" title="#{bundle.ViewProfessorDiscTurTitle_idProfessor}" class="control-label">
+                                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                                    </h:outputText></td>
+                            </tr>
+                            <tr>
+                                <td><h:outputText value="#{bundle.ViewProfessorDiscTurLabel_idTurma}" class="control-label"/></td>
+                                <td><h:outputText value="#{professorDiscTurController.selected.idTurma.nome}" title="#{bundle.ViewProfessorDiscTurTitle_idTurma}" class="control-label"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
                 <br />
-                <h:commandLink action="#{professorDiscTurController.destroyAndView}" value="#{bundle.ViewProfessorDiscTurDestroyLink}"/>
-                <br />
-                <br />
-                <h:link outcome="Edit" value="#{bundle.ViewProfessorDiscTurEditLink}"/>
-                <br />
-                <h:commandLink action="#{professorDiscTurController.prepareCreate}" value="#{bundle.ViewProfessorDiscTurCreateLink}" />
-                <br />
-                <h:commandLink action="#{professorDiscTurController.prepareList}" value="#{bundle.ViewProfessorDiscTurShowAllLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ViewProfessorDiscTurIndexLink}"/>
-
+                <h:commandLink action="#{professorDiscTurController.prepareCreate}" value="#{bundle.ViewProfessorDiscTurCreateLink}" class="btn btn-default"/>
+                <h:commandLink action="#{professorDiscTurController.prepareList}" value="#{bundle.ViewProfessorDiscTurShowAllLink}" class="btn btn-default"/>
+                <h:link outcome="Edit" value="#{bundle.ViewProfessorDiscTurEditLink}" class="btn btn-info"/>
+                <h:commandLink action="#{professorDiscTurController.destroyAndView}" value="#{bundle.ViewProfessorDiscTurDestroyLink}" class="btn btn-danger"/>
             </h:form>
         </ui:define>
     </ui:composition>
