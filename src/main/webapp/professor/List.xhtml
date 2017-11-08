@@ -35,6 +35,12 @@
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListProfessorTitle_email}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.email}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
                                     <h:outputText value="#{bundle.ListProfessorTitle_usuario}"/>
                                 </f:facet>
                                 <h:outputText value="#{item.usuario}"/>
@@ -44,6 +50,12 @@
                                     <h:outputText value="#{bundle.ListProfessorTitle_senha}"/>
                                 </f:facet>
                                 <h:outputText value="#{item.senha}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListProfessorTitle_tipo}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.tipoString}"/>
                             </h:column>
                             <h:column>
                                 <f:facet name="header">

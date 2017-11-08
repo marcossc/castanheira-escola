@@ -35,6 +35,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Professor.findById", query = "SELECT p FROM Professor p WHERE p.id = :id")
     , @NamedQuery(name = "Professor.findByNome", query = "SELECT p FROM Professor p WHERE p.nome = :nome")
     , @NamedQuery(name = "Professor.findByUsuario", query = "SELECT p FROM Professor p WHERE p.usuario = :usuario")
+    , @NamedQuery(name = "Professor.findByUsuarioSenha", query = "SELECT p FROM Professor p WHERE p.usuario = :usuario and p.senha = :senha")
     , @NamedQuery(name = "Professor.findBySenha", query = "SELECT p FROM Professor p WHERE p.senha = :senha")})
 public class Professor implements Serializable {
 
@@ -43,7 +44,7 @@ public class Professor implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "id")
-    @SequenceGenerator(name = "PROFESSOR_ID_SEQ_GEN", sequenceName = "PROFESSOR_ID_SEQ", allocationSize=1)
+    @SequenceGenerator(name = "PROFESSOR_ID_SEQ_GEN", sequenceName = "PROFESSOR_ID_SEQ", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PROFESSOR_ID_SEQ_GEN")
     private Integer id;
     @Basic(optional = false)
@@ -53,14 +54,23 @@ public class Professor implements Serializable {
     private String nome;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 30)
+    @Size(min = 1, max = 255)
     @Column(name = "usuario")
     private String usuario;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 30)
+    @Size(min = 1, max = 255)
     @Column(name = "senha")
     private String senha;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 255)
+    @Column(name = "email")
+    private String email;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "tipo")
+    private Character tipo;
     @OneToMany(mappedBy = "idProfessor")
     private Collection<ProfessorDiscTur> professorDiscTurCollection;
 
@@ -71,11 +81,13 @@ public class Professor implements Serializable {
         this.id = id;
     }
 
-    public Professor(Integer id, String nome, String usuario, String senha) {
+    public Professor(Integer id, String nome, String usuario, String senha, String email, Character tipo) {
         this.id = id;
         this.nome = nome;
         this.usuario = usuario;
         this.senha = senha;
+        this.email = email;
+        this.tipo = tipo;
     }
 
     public Integer getId() {
@@ -108,6 +120,34 @@ public class Professor implements Serializable {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Character getTipo() {
+        return tipo;
+    }
+
+    public String getTipoString() {
+        switch (tipo) {
+            case 'P':
+                return "Professor";
+            case 'D':
+                return "Direção/Supervisão";
+            case 'S':
+                return "Secretaria";
+        }
+        return null;
+    }
+
+    public void setTipo(Character tipo) {
+        this.tipo = tipo;
     }
 
     @XmlTransient
@@ -143,5 +183,5 @@ public class Professor implements Serializable {
     public String toString() {
         return nome;
     }
-    
+
 }
