@@ -19,10 +19,18 @@
                     <h:inputText id="id" value="#{professorController.selected.id}" title="#{bundle.EditProfessorTitle_id}" required="true" requiredMessage="#{bundle.EditProfessorRequiredMessage_id}" disabled="true" class="form-control"/>
                     <h:outputLabel value="#{bundle.EditProfessorLabel_nome}" for="nome" class="control-label" />
                     <h:inputText id="nome" value="#{professorController.selected.nome}" title="#{bundle.EditProfessorTitle_nome}" required="true" requiredMessage="#{bundle.EditProfessorRequiredMessage_nome}" class="form-control"/>
+                    <h:outputLabel value="#{bundle.EditProfessorLabel_email}" for="email" class="control-label" />
+                    <h:inputText id="email" value="#{professorController.selected.email}" title="#{bundle.EditProfessorTitle_email}" required="true" requiredMessage="#{bundle.EditProfessorRequiredMessage_email}" class="form-control"/>
                     <h:outputLabel value="#{bundle.EditProfessorLabel_usuario}" for="usuario" class="control-label" />
                     <h:inputText id="usuario" value="#{professorController.selected.usuario}" title="#{bundle.EditProfessorTitle_usuario}" required="true" requiredMessage="#{bundle.EditProfessorRequiredMessage_usuario}" class="form-control"/>
                     <h:outputLabel value="#{bundle.EditProfessorLabel_senha}" for="senha" class="control-label" />
                     <h:inputText id="senha" value="#{professorController.selected.senha}" title="#{bundle.EditProfessorTitle_senha}" required="true" requiredMessage="#{bundle.EditProfessorRequiredMessage_senha}" class="form-control"/>
+                    <h:outputLabel value="#{bundle.EditProfessorLabel_tipo}" for="tipo" class="control-label" />
+                    <h:selectOneMenu id="tipo" value="#{professorController.selected.tipo}" title="#{bundle.EditProfessorTitle_tipo}" class="form-control">
+                        <f:selectItem itemLabel="Direção/Supervisão" itemValue="D"/>
+                        <f:selectItem itemLabel="Professor" itemValue="P"/>
+                        <f:selectItem itemLabel="Secretaria" itemValue="S"/>
+                    </h:selectOneMenu>
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{professorController.update}" value="#{bundle.EditProfessorSaveLink}" class="btn btn-primary"/>

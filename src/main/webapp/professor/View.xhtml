@@ -29,12 +29,20 @@
                                 <td><h:outputText value="#{professorController.selected.nome}" title="#{bundle.ViewProfessorTitle_nome}" class="control-label"/></td>
                             </tr>
                             <tr>
+                                <td><h:outputText value="#{bundle.ViewProfessorLabel_email}" class="control-label"/></td>
+                                <td><h:outputText value="#{professorController.selected.email}" title="#{bundle.ViewProfessorTitle_email}" class="control-label"/></td>
+                            </tr>
+                            <tr>
                                 <td><h:outputText value="#{bundle.ViewProfessorLabel_usuario}" class="control-label"/></td>
                                 <td><h:outputText value="#{professorController.selected.usuario}" title="#{bundle.ViewProfessorTitle_usuario}" class="control-label" /></td>
                             </tr>
                             <tr>
                                 <td><h:outputText value="#{bundle.ViewProfessorLabel_senha}" class="control-label"/></td>
                                 <td><h:outputText value="#{professorController.selected.senha}" title="#{bundle.ViewProfessorTitle_senha}" class="control-label"/></td>
+                            </tr>
+                            <tr>
+                                <td><h:outputText value="#{bundle.ViewProfessorLabel_tipo}" class="control-label"/></td>
+                                <td><h:outputText value="#{professorController.selected.tipoString}" title="#{bundle.ViewProfessorTitle_tipo}" class="control-label"/></td>
                             </tr>
                         </tbody>
                     </table>

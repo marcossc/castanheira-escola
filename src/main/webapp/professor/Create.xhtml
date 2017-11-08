@@ -17,10 +17,18 @@
                 <h:panelGrid columns="2" columnClasses="firstColumn,secondColumn">
                     <h:outputLabel value="#{bundle.CreateProfessorLabel_nome}" for="nome" class="control-label" />
                     <h:inputText id="nome" value="#{professorController.selected.nome}" title="#{bundle.CreateProfessorTitle_nome}" required="true" requiredMessage="#{bundle.CreateProfessorRequiredMessage_nome}" class="form-control"/>
+                    <h:outputLabel value="#{bundle.CreateProfessorLabel_email}" for="email" class="control-label" />
+                    <h:inputText id="email" value="#{professorController.selected.email}" title="#{bundle.CreateProfessorTitle_email}" required="true" requiredMessage="#{bundle.CreateProfessorRequiredMessage_email}" class="form-control"/>
                     <h:outputLabel value="#{bundle.CreateProfessorLabel_usuario}" for="usuario" class="control-label" />
                     <h:inputText id="usuario" value="#{professorController.selected.usuario}" title="#{bundle.CreateProfessorTitle_usuario}" required="true" requiredMessage="#{bundle.CreateProfessorRequiredMessage_usuario}" class="form-control"/>
                     <h:outputLabel value="#{bundle.CreateProfessorLabel_senha}" for="senha" class="control-label" />
                     <h:inputText id="senha" value="#{professorController.selected.senha}" title="#{bundle.CreateProfessorTitle_senha}" required="true" requiredMessage="#{bundle.CreateProfessorRequiredMessage_senha}" class="form-control"/>
+                    <h:outputLabel value="#{bundle.CreateProfessorLabel_tipo}" for="tipo" class="control-label" />
+                    <h:selectOneMenu id="tipo" value="#{professorController.selected.tipo}" title="#{bundle.CreateProfessorTitle_tipo}" class="form-control">
+                        <f:selectItem itemLabel="Direção/Supervisão" itemValue="D"/>
+                        <f:selectItem itemLabel="Professor" itemValue="P"/>
+                        <f:selectItem itemLabel="Secretaria" itemValue="S"/>
+                    </h:selectOneMenu>
                 </h:panelGrid>
                 <br />
                 <h:commandLink value="#{bundle.CreateProfessorSaveLink}" action="#{professorController.create}" class="btn btn-primary"/>
