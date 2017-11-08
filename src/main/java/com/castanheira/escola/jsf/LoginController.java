@@ -8,6 +8,8 @@ package com.castanheira.escola.jsf;
 import com.castanheira.escola.jpa.entities.Professor;
 import com.castanheira.escola.jpa.session.ProfessorFacade;
 import com.castanheira.escola.jsf.entities.Login;
+import com.castanheira.escola.jsf.util.FacesUtil;
+import com.castanheira.escola.jsf.util.SessionUtil;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -33,20 +35,26 @@ public class LoginController implements Serializable {
     private Professor professor = new Professor();
     
 
-    public String envia() {
+    public String login() {
 
         professor = professorFacade.validaLogin(login.getUsuario(), login.getSenha());
         if (professor == null) {
             professor = new Professor();
-            FacesContext.getCurrentInstance().addMessage(
-                    null,
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuário não encontrado!",
-                            "Erro no Login!"));
+            FacesUtil.addErrorMessage("Usuário não encontrado!");
             return null;
         } else {
+            SessionUtil.setParam("usuario", professor);
             return "/index_teste";
         }
-
+    }
+    
+    public String logout() {
+        SessionUtil.remove("usuario");
+        return "/login";
+    }
+    
+    public Professor getLogado(){
+        return (Professor) SessionUtil.getParam("usuario");
     }
     
     public LoginController() {
