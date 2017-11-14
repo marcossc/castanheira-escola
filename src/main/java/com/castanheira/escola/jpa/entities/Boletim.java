@@ -162,6 +162,14 @@ public class Boletim implements Serializable {
     public void setIdDisciplina(Disciplina idDisciplina) {
         this.idDisciplina = idDisciplina;
     }
+    
+    public String getNomeAluno() {
+        return idMatricula.getIdAluno().getNome();
+    }
+    
+    public String getNomeTurma() {
+        return idMatricula.getIdTurma().getNome();
+    }
 
     public Matricula getIdMatricula() {
         return idMatricula;

@@ -23,7 +23,7 @@ public class Filtro implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpSession session = req.getSession();
 
-        if ((session.getAttribute("usuario") != null)
+        /*if ((session.getAttribute("usuario") != null)
                 || (req.getRequestURI().endsWith("login.xhtml"))
                 || (req.getRequestURI().contains("javax.faces.resource/"))) {
 
@@ -31,7 +31,8 @@ public class Filtro implements Filter {
             chain.doFilter(request, response);
         } else {
             redireciona("login.xhtml", response);
-        }
+        }*/
+        chain.doFilter(request, response);
 
     }
 

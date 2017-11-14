@@ -5,7 +5,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <ui:composition template="/template.xhtml">
+    <ui:composition template="/template_dashgum.xhtml">
         <ui:define name="title">
             <h:outputText value="#{bundle.ListBoletimTitle}"></h:outputText>
         </ui:define>
@@ -14,17 +14,40 @@
                 <h:panelGroup id="messagePanel" layout="block">
                     <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                 </h:panelGroup>
+                <h:panelGrid columns="5" width="100%">
+                    <h:outputLabel value="#{bundle.CreateMatriculaLabel_idTurma}" for="idTurma" class="control-label" />
+                    <h:selectOneMenu id="idTurma" value="#{matriculaController.selected.idTurma}" title="#{bundle.CreateMatriculaTitle_idTurma}" class="form-control" >
+                        <f:selectItems value="#{turmaController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateProfessorDiscTurLabel_idDisciplina}" for="idDisciplina" class="control-label" />
+                    <h:selectOneMenu id="idDisciplina" value="#{professorDiscTurController.selected.idDisciplina}" title="#{bundle.CreateProfessorDiscTurTitle_idDisciplina}" class="form-control" >
+                        <f:selectItems value="#{disciplinaController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:commandLink action="#{boletimController.filtrar}" value="Filtrar" class="btn btn-default"/>
+                </h:panelGrid>
                 <h:outputText escape="false" value="#{bundle.ListBoletimEmpty}" rendered="#{boletimController.items.rowCount == 0}"/>
                 <h:panelGroup rendered="#{boletimController.items.rowCount > 0}">
-                    <h:outputText value="#{boletimController.pagination.pageFirstItem + 1}..#{boletimController.pagination.pageLastItem + 1}/#{boletimController.pagination.itemsCount}"/>&nbsp;
+                    <h:outputText value="#{boletimController.pagination.pageFirstItem + 1} a #{boletimController.pagination.pageLastItem + 1} de #{boletimController.pagination.itemsCount}"/>&nbsp;
                     <h:commandLink action="#{boletimController.previous}" value="#{bundle.Previous} #{boletimController.pagination.pageSize}" rendered="#{boletimController.pagination.hasPreviousPage}"/>&nbsp;
                     <h:commandLink action="#{boletimController.next}" value="#{bundle.Next} #{boletimController.pagination.pageSize}" rendered="#{boletimController.pagination.hasNextPage}"/>&nbsp;
-                    <h:dataTable value="#{boletimController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                    <h:dataTable value="#{boletimController.items}" var="item" styleClass="table table-striped table-advance table-hover">
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListBoletimTitle_id}"/>
+                                <h:outputText value="Aluno"/>
                             </f:facet>
-                            <h:outputText value="#{item.id}"/>
+                            <h:outputText value="#{item.nomeAluno}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Turma"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nomeTurma}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListBoletimTitle_idDisciplina}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nomeDisciplina}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
@@ -74,27 +97,15 @@
                             </f:facet>
                             <h:outputText value="#{item.totalFalta}"/>
                         </h:column>
+
+
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListBoletimTitle_idDisciplina}"/>
+                                <h:outputText value="Detalhes"/>
                             </f:facet>
-                            <h:outputText value="#{item.nomeDisciplina}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListBoletimTitle_idMatricula}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idMatricula}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="&nbsp;"/>
-                            </f:facet>
-                            <h:commandLink action="#{boletimController.prepareView}" value="#{bundle.ListBoletimViewLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{boletimController.prepareEdit}" value="#{bundle.ListBoletimEditLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{boletimController.destroy}" value="#{bundle.ListBoletimDestroyLink}"/>
+                            <h:commandLink action="#{boletimController.prepareView}" styleClass="btn btn-success btn-xs">
+                                <span class="glyphicon glyphicon-zoom-in"></span>
+                            </h:commandLink>
                         </h:column>
                     </h:dataTable>
                 </h:panelGroup>
