@@ -33,6 +33,7 @@
                                 <ul class="sub">
                                     <li><h:link outcome="/aluno/List" value="Listar"/></li>
                                     <li><h:commandLink action="#{alunoController.prepareCreate}" value="#{bundle.ListAlunoCreateLink}"/></li>
+                                    <li><h:link outcome="/matricula/List" value="Matricular"/></li>
                                 </ul>
                             </li>
                             <li class="sub-menu">
@@ -53,6 +54,7 @@
                                 <ul class="sub">
                                     <li><h:link outcome="/disciplina/List" value="Listar"/></li>
                                     <li><h:commandLink action="#{anoController.prepareCreate}" value="#{bundle.ListAnoCreateLink}"/></li>
+                                    <li><h:link outcome="/disciplinaAno/List" value="Vincular à ano"/></li>
                                 </ul>
                             </li>
                             <li class="sub-menu">
@@ -63,6 +65,7 @@
                                 <ul class="sub">
                                     <li><h:link outcome="/professor/List" value="Listar"/></li>
                                     <li><h:commandLink action="#{anoController.prepareCreate}" value="#{bundle.ListAnoCreateLink}"/></li>
+                                    <li><h:link outcome="/professorDiscTur/List" value="Vincular à turma"/></li>
                                 </ul>
                             </li>
                             <li class="sub-menu">
@@ -76,10 +79,14 @@
                                 </ul>
                             </li>
                             <li class="sub-menu">
-                                <a href="../boletim/mockup_notas.xhtml" >
+                                <a href="javascript:;" >
                                     <i class="fa fa-table"></i>
-                                    <span>Digitar Notas</span>
+                                    <span>Boletim</span>
                                 </a>
+                                <ul class="sub">
+                                    <li><h:link outcome="/boletim/mockup_notas" value="Digitar Notas"/></li>
+                                    <li><h:commandLink action="#{anoController.prepareCreate}" value="Gerar Boletins"/></li>
+                                </ul>
                             </li>
                         </ul>
                     </h:form>

@@ -27,6 +27,7 @@
                 <h:form class="form-login">
                     <h2 class="form-login-heading">e-scola online</h2>
                     <div class="login-wrap">
+                        <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                         <h:inputText id="nomeUsuario" value="#{loginController.login.usuario}" class="form-control" pt:placeholder="Usuário" pt:autofocus="true" />
                         <br />
                         <h:inputSecret id="senha" value="#{loginController.login.senha}" class="form-control" pt:placeholder="Senha" />

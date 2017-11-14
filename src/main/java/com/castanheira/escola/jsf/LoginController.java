@@ -35,11 +35,11 @@ public class LoginController implements Serializable {
         professor = professorFacade.validaLogin(login.getUsuario(), login.getSenha());
         if (professor == null) {
             professor = new Professor();
-            FacesUtil.addErrorMessage("Usuário não encontrado!");
+            FacesUtil.addErrorMessage("Usuário/senha inválidos!");
             return null;
         } else {
             SessionUtil.setParam("usuario", professor);
-            return "/index_teste";
+            return "/index";
         }
     }
     

@@ -1,40 +1,29 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Facelet Title</title>
         <h:outputStylesheet name="css/jsfcrud.css"/>
     </h:head>
     <h:body>
-        Hello from Facelets
-        <br />
-        <h:link outcome="/aluno/List" value="Show All Aluno Items"/>
-        <br />
-        <h:link outcome="/ano/List" value="Show All Ano Items"/>
-        <br />
-        <h:link outcome="/boletim/List" value="Show All Boletim Items"/>
-        <br />
-        <h:link outcome="/disciplina/List" value="Show All Disciplina Items"/>
-        <br />
-        <h:link outcome="/disciplinaAno/List" value="Show All DisciplinaAno Items"/>
-        <br />
-        <h:link outcome="/matricula/List" value="Show All Matricula Items"/>
-        <br />
-        <h:link outcome="/professor/List" value="Show All Professor Items"/>
-        <br />
-        <h:link outcome="/professorDiscTur/List" value="Show All ProfessorDiscTur Items"/>
-        <br />
-        <h:link outcome="/turma/List" value="Show All Turma Items"/>
+        <ui:composition template="/template_dashgum.xhtml">
+            <ui:define name="body">
+                <div align="center">
+                    <h2>Bem vindo ao E-scola Online</h2>
+                    <br />
+                    <br />
+                    <br />
+                    <h:graphicImage value="resources/img/escola.png"/>
+                    <br />
+                    <br />
+                    <br />
+                    <h3>Em caso de dúvidas, envie um email para:</h3>
+                    <h3><a href="mailto:marcos@castanheira.info">marcos@castanheira.info</a></h3>
+                </div>
+            </ui:define>
+        </ui:composition>
     </h:body>
-
-
-
-
-
-
-
-
-
 </html>
 
