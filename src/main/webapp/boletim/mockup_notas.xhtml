@@ -96,13 +96,8 @@
                     </table>
                 </h:panelGroup>
                 <br />
-                <h:commandLink action="#{boletimController.prepareCreate}" value="#{bundle.ListBoletimCreateLink}"/>
-                <br />
-                <br />
-                <h:commandLink action="#{boletimController.geraXML}" value="Teste XML"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ListBoletimIndexLink}"/>
+                <h:link value="Salvar" outcome="/boletim/List" class="btn btn-primary"/>
+                <h:link value="Cancelar" outcome="/boletim/List" class="btn btn-default"/>
             </h:form>
         </ui:define>
     </ui:composition>
