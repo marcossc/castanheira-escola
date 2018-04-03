@@ -15,8 +15,9 @@
             <h:outputText value="#{bundle.ListAlunoTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
-
-            
+            <script>
+                document.getElementById("aluno_menu").className = "active";
+            </script>
             <h:form styleClass="jsfcrud_list_form" id="listaAlunoForm">
                 <h:panelGroup id="messagePanel" layout="block">
                     <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>

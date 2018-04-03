@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template_dashgum.xhtml">
+        <f:metadata>
+            <f:viewAction action="#{boletimBean.configuracoesTelaPesquisa}" />
+        </f:metadata>
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListBoletimTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <script>
+                document.getElementById("boletim_menu").className = "active";
+            </script>
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListBoletimEmpty}" rendered="#{boletimBean.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{boletimBean.items.rowCount > 0}">
+                    <h:panelGroup layout="block" id="divPaginacao">
+                        <h:outputText value="#{boletimBean.pagination.pageFirstItem + 1} a #{boletimBean.pagination.pageLastItem + 1} de #{boletimBean.pagination.itemsCount}"/>&nbsp;
+                        <h:commandLink action="#{boletimBean.previous}" value="#{bundle.Previous} #{boletimBean.pagination.pageSize}" rendered="#{boletimBean.pagination.hasPreviousPage}"/>&nbsp;
+                        <h:commandLink action="#{boletimBean.next}" value="#{bundle.Next} #{boletimBean.pagination.pageSize}" rendered="#{boletimBean.pagination.hasNextPage}"/>&nbsp;
+                    </h:panelGroup>
+                    <div class="content-panel">
+                        <h:panelGroup layout="block" class="col-md-12 text-right">
+                            <h:selectOneMenu id="idAno" value="#{boletimBean.idTurmaFiltro}" 
+                                             class="form-control" style="display: inline;width:30%;margin-right: 5px">
+                                <f:selectItem itemValue="" itemLabel="Selecione a Turma"/>
+                                <f:selectItems var="turma" itemValue="#{turma.id}" value="#{boletimBean.listaTurmas}"/>
+                                <p:ajax event="change" update="@this"/>
+                            </h:selectOneMenu>
+                            <h:selectOneMenu id="idDisciplina" value="#{boletimBean.idDisciplinaFiltro}" 
+                                             class="form-control" style="display: inline;width:30%;margin-right: 5px">
+                                <f:selectItem itemValue="" itemLabel="Selecione a Disciplina"/>
+                                <f:selectItems var="disciplina" itemValue="#{disciplina.id}" value="#{boletimBean.listaDisciplina}"/>
+                                <p:ajax event="change" update="@this"/>
+                            </h:selectOneMenu>                            
+                            <p:commandLink styleClass="btn btn-primary" process="@this" update="listaBoletim, divPaginacao" actionListener="#{boletimBean.getItemsFiltro()}">
+                                  <span class="glyphicon glyphicon-search"></span>
+                              </p:commandLink>
+                        </h:panelGroup>
+                    
+                        <h:dataTable id="listaBoletim" value="#{boletimBean.items}" var="item" styleClass="table table-striped table-advance table-hover">
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Aluno"/>
+                                </f:facet>
+                                <h:outputText value="#{item.nomeAluno}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Turma"/>
+                                </f:facet>
+                                <h:outputText value="#{item.nomeTurma}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListBoletimTitle_idDisciplina}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.nomeDisciplina}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListBoletimTitle_nota1}"/>
+                                </f:facet>
+                                <h:inputText value="#{item.nota1}" styleClass="form-control" disabled="#{!boletimBean.isDisciplinaProfessor(item.idDisciplina)}" />
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListBoletimTitle_falta1}"/>
+                                </f:facet>
+                                <h:inputText value="#{item.falta1}" styleClass="form-control" disabled="#{!boletimBean.isDisciplinaProfessor(item.idDisciplina)}" />
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListBoletimTitle_nota2}"/>
+                                </f:facet>
+                                <h:inputText value="#{item.nota2}" styleClass="form-control" disabled="#{!boletimBean.isDisciplinaProfessor(item.idDisciplina)}" />
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListBoletimTitle_falta2}"/>
+                                </f:facet>
+                                <h:inputText value="#{item.falta2}" styleClass="form-control" disabled="#{!boletimBean.isDisciplinaProfessor(item.idDisciplina)}" />
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListBoletimTitle_nota3}"/>
+                                </f:facet>
+                                <h:inputText value="#{item.nota3}" styleClass="form-control" disabled="#{!boletimBean.isDisciplinaProfessor(item.idDisciplina)}" />
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListBoletimTitle_falta3}"/>
+                                </f:facet>
+                                <h:inputText value="#{item.falta3}" styleClass="form-control" disabled="#{!boletimBean.isDisciplinaProfessor(item.idDisciplina)}" />
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListBoletimTitle_media}"/>
+                                </f:facet>
+                                <h:inputText value="#{item.media}" styleClass="form-control" disabled="#{!boletimBean.isDisciplinaProfessor(item.idDisciplina)}" />
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListBoletimTitle_totalFalta}"/>
+                                </f:facet>
+                                <h:inputText value="#{item.totalFalta}" styleClass="form-control" disabled="#{!boletimBean.isDisciplinaProfessor(item.idDisciplina)}" />
+                            </h:column>
+
+
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Detalhes"/>
+                                </f:facet>
+                                <h:commandLink action="#{boletimBean.prepareView}" styleClass="btn btn-success btn-xs">
+                                    <span class="glyphicon glyphicon-zoom-in"></span>
+                                </h:commandLink>
+                            </h:column>
+                        </h:dataTable>
+                    </div>
+                </h:panelGroup>
+                <br />
+                <h:commandLink value="#{bundle.CreateBoletimSaveLink}" action="#{boletimBean.salvarNotas}" class="btn btn-primary"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

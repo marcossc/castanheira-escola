@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template_dashgum.xhtml">
+        <f:metadata>
+            <f:viewAction action="#{boletimBean.configuracoesTelaGerarBoletim}" />
+        </f:metadata>
+        <ui:define name="title">
+            <h:outputText value="#{bundle.GenerateBoletimTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <script>
+                document.getElementById("boletim_menu").className = "active";
+            </script>
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form class="form-horizontal style-form">
+                <h:panelGrid columns="2" columnClasses="firstColumn,secondColumn">
+                    
+                    <h:outputLabel value="#{bundle.GenerateBoletimLabel_idTurma}" for="idTurma" class="control-label" />
+                    <h:selectOneMenu id="idTurma" value="#{boletimBean.turmaGerarBoletim}" 
+                                     title="#{bundle.GenerateBoletimLabel_idTurma}" class="form-control">
+                        <f:selectItem itemValue="" itemLabel="Selecione a Turma"/>
+                        <f:selectItems value="#{boletimBean.listaTurmas}"/>
+                        <p:ajax update="idAluno" event="change" process="@this" listener="#{boletimBean.getAlunosTurma()}"></p:ajax>
+                    </h:selectOneMenu>
+                    
+                    <h:outputLabel value="#{bundle.GenerateBoletimLabel_idAluno}" for="idAluno" class="control-label" />
+                    <h:selectOneMenu id="idAluno" value="#{boletimBean.idAlunoFiltro}" 
+                                     disabled="#{boletimBean.turmaGerarBoletim == null}" title="#{bundle.GenerateBoletimLabel_idAluno}" class="form-control" >
+                        <f:selectItem itemValue="" itemLabel="Selecione o Aluno"/>
+                        <f:selectItems var="aluno" itemValue="#{aluno.id}" itemLabel="#{aluno.nome}"  value="#{boletimBean.listaAluno}"/>
+                        <p:ajax event="change" update="@this"/>
+                    </h:selectOneMenu>
+
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{boletimBean.gerarBoletim}" value="#{bundle.GenerateBoletimGenerateLink}" class="btn btn-primary" target="_blank" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

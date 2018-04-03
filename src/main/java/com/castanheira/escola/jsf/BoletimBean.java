@@ -1,14 +1,20 @@
 package com.castanheira.escola.jsf;
 
+import com.castanheira.escola.jpa.entities.Aluno;
 import com.castanheira.escola.jpa.entities.Boletim;
 import com.castanheira.escola.jpa.entities.Disciplina;
+import com.castanheira.escola.jpa.entities.Matricula;
 import com.castanheira.escola.jpa.entities.Professor;
 import com.castanheira.escola.jpa.entities.Turma;
+import com.castanheira.escola.jpa.session.AlunoFacade;
+import com.castanheira.escola.jpa.session.MatriculaFacade;
 import com.castanheira.escola.jsf.util.JsfUtil;
 import com.castanheira.escola.jsf.util.PaginationHelper;
 import com.castanheira.escola.jsf.controller.BoletimRN;
 import com.castanheira.escola.jsf.controller.ProfessorRN;
 import com.castanheira.escola.jsf.util.SessionUtil;
+import java.io.ByteArrayOutputStream;
+import java.io.OutputStream;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -24,6 +30,14 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletResponse;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRExporterParameter;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.export.JRPdfExporter;
 
 @Named("boletimBean")
 @SessionScoped
@@ -37,20 +51,24 @@ public class BoletimBean implements Serializable {
     private com.castanheira.escola.jpa.session.TurmaFacade ejbTurmaFacade;
     @EJB
     private com.castanheira.escola.jpa.session.DisciplinaFacade ejbDisciplinaFacade;
-
     @EJB 
     private BoletimRN ejbBoletimRN;
-    
     @EJB
     private ProfessorRN ejbProfessorController;
-    
+    @EJB
+    private AlunoFacade ejbAlunoFacade;
+    @EJB
+    private MatriculaFacade ejbMatriculaFacade;    
     
     private PaginationHelper pagination;
     private int selectedItemIndex;
     private List<Turma> listaTurmas;
     private List<Disciplina> listaDisciplina;
+    private List<Aluno> listaAluno;
     private Integer idTurmaFiltro;
     private Integer idDisciplinaFiltro;
+    private Long idAlunoFiltro;
+    private Turma turmaGerarBoletim;
     private Professor usuarioLogado;
     
     public BoletimBean() {
@@ -63,6 +81,14 @@ public class BoletimBean implements Serializable {
         idTurmaFiltro = null;
         idDisciplinaFiltro = null;
         items = null;
+    }
+    
+    public void configuracoesTelaGerarBoletim() {
+        usuarioLogado = getUsuarioLogado();
+        carregaComboTurmas();
+        turmaGerarBoletim = null;
+        listaAluno = new ArrayList();
+        idAlunoFiltro = null;
     }
     
     public void carregaComboTurmas(){
@@ -88,6 +114,78 @@ public class BoletimBean implements Serializable {
         }
         return current;
     }
+    
+    public void getAlunosTurma(){
+        listaAluno = new ArrayList();
+        if (turmaGerarBoletim != null) {
+            listaAluno = ejbAlunoFacade.findAlunoTurma(turmaGerarBoletim.getId());
+        }
+    }
+    
+    public void gerarBoletim(){
+        if (turmaGerarBoletim != null){
+            HttpServletResponse response = (HttpServletResponse)FacesContext.getCurrentInstance().getExternalContext().getResponse();
+            OutputStream out = null; 
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            try {
+                ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+                String pathToReportPackage = servletContext.getRealPath("resources/relatorio");
+                JRPdfExporter PdfExporter = new JRPdfExporter ();
+                List jasperPrintList = new ArrayList ();
+                String jasperFile = pathToReportPackage + "\\Boletim.jasper";
+                for (Aluno aluno : listaAluno) {
+
+                    if (idAlunoFiltro != null && 
+                            idAlunoFiltro != aluno.getId()) {
+                        continue;
+                    }
+
+                    Matricula matriculaAluno = ejbMatriculaFacade.findMatriculaAlunoTurma(aluno.getId(), turmaGerarBoletim.getId());
+
+                    if (matriculaAluno.getBoletimCollection().size() > 0) {
+                        String statusAprovacao = ejbBoletimRN.verificarAprovacaoRelatorio((List<Boletim>)matriculaAluno.getBoletimCollection());
+                        for (Boletim boletim : matriculaAluno.getBoletimCollection()) {
+                            boletim.getIdMatricula().setStatusAprovacao(statusAprovacao);
+                        }
+                        JasperPrint print = JasperFillManager.fillReport(jasperFile, null, new JRBeanCollectionDataSource(matriculaAluno.getBoletimCollection()));
+                        jasperPrintList.add (print);
+                    }
+                }
+
+                PdfExporter.setParameter (JRExporterParameter.JASPER_PRINT_LIST, jasperPrintList);
+                PdfExporter.setParameter (JRExporterParameter.OUTPUT_STREAM, stream);
+                PdfExporter.exportReport ();
+                byte[] bytes = stream.toByteArray();
+
+                response.setContentType("application/pdf");
+         
+                response.setHeader("Pragma","");
+                response.setHeader("Cache-Control","");
+                response.setHeader("Expires",""); 
+
+                out = response.getOutputStream();  
+                out.write(bytes);
+                response.setContentLength(bytes.length);
+                out.flush();	
+                out.close();
+                JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/resources/Bundle").getString("GenerateBoletimSuccess"));    
+            }catch(JRException e) {
+                JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/resources/Bundle").getString("GenerateBoletimErrorOccured"));
+            }catch(Exception e){
+                JsfUtil.addErrorMessage(e, e.getMessage());
+            }finally {
+                try {
+                out.close();
+                stream.close();
+                }catch(Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }else {
+            JsfUtil.addErrorMessage(ResourceBundle.getBundle("/resources/Bundle").getString("GenerateBoletimErrorSelectTurma"));
+        }
+    }
+    
 
     public PaginationHelper getPagination() {
         if (pagination == null) {
@@ -123,7 +221,7 @@ public class BoletimBean implements Serializable {
     public String prepareCreate() {
         current = new Boletim();
         selectedItemIndex = -1;
-        return "mockup_notas";
+        return "digitar_notas";
     }
 
     public String create() {
@@ -249,13 +347,13 @@ public class BoletimBean implements Serializable {
     public String next() {
         getPagination().nextPage();
         recreateModel();
-        return "mockup_notas";
+        return "digitar_notas";
     }
 
     public String previous() {
         getPagination().previousPage();
         recreateModel();
-        return "mockup_notas";
+        return "digitar_notas";
     }
 
     public SelectItem[] getItemsAvailableSelectMany() {
@@ -293,6 +391,32 @@ public class BoletimBean implements Serializable {
     public List<Disciplina> getListaDisciplina() {
         return listaDisciplina;
     }
+
+    public List<Aluno> getListaAluno() {
+        return listaAluno;
+    }
+
+    public void setListaAluno(List<Aluno> listaAluno) {
+        this.listaAluno = listaAluno;
+    }
+
+    public Long getIdAlunoFiltro() {
+        return idAlunoFiltro;
+    }
+
+    public void setIdAlunoFiltro(Long idAlunoFiltro) {
+        this.idAlunoFiltro = idAlunoFiltro;
+    }
+
+    public Turma getTurmaGerarBoletim() {
+        return turmaGerarBoletim;
+    }
+
+    public void setTurmaGerarBoletim(Turma turmaGerarBoletim) {
+        this.turmaGerarBoletim = turmaGerarBoletim;
+    }
+    
+
     
     public Professor getUsuarioLogado(){
         return (Professor) SessionUtil.getParam("usuario");

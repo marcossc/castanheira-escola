@@ -77,4 +77,9 @@ public class AlunoFacade extends AbstractFacade<Aluno> {
         return ((Long) q.getSingleResult()).intValue();
     }
     
+    public List<Aluno> findAlunoTurma(int idTurma) {
+        return em.createQuery("SELECT m.idAluno FROM Matricula m WHERE m.idTurma.id = :idTurma")
+                .setParameter("idTurma", idTurma).getResultList();
+    }
+    
 }

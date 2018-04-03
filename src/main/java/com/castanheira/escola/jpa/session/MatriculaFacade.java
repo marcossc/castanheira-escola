@@ -35,4 +35,11 @@ public class MatriculaFacade extends AbstractFacade<Matricula> {
         return entity;
     }
     
+    public Matricula findMatriculaAlunoTurma(long idAluno, int idTurma) {
+        return (Matricula)em.createNamedQuery("Matricula.findByIdAlunoTurma")
+                .setParameter("idAluno", idAluno)
+                .setParameter("idTurma", idTurma)
+                .getSingleResult();
+    }
+    
 }

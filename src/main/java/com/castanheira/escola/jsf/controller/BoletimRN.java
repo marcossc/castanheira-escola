@@ -121,4 +121,21 @@ public class BoletimRN implements Serializable {
         }
     }
     
+    public String verificarAprovacaoRelatorio(List<Boletim> listBoletimAluno) {
+        String statusAprovacao = "Aprovado";
+        for (Boletim boletim : listBoletimAluno) {
+        //verifica se a media das notas são superiores a 50
+            if (boletim.getNota3() == 0 && boletim.getFalta3() == 0) {
+                statusAprovacao = "Cursando";
+            }else {
+                int totalNota = boletim.getNota1() + boletim.getNota2() + boletim.getNota3();
+                int totalFalta = boletim.getFalta1() + boletim.getFalta2() + boletim.getFalta3();
+                if (totalNota < 50 && totalFalta/3 < 50 ) {
+                    statusAprovacao = "Reprovado";
+                }
+            }  
+        }
+        return statusAprovacao;
+    }  
+    
 }

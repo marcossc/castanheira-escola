@@ -10,6 +10,9 @@
             <h:outputText value="#{bundle.EditAlunoTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
+            <script>
+                document.getElementById("aluno_menu").className = "active";
+            </script>
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
@@ -25,8 +28,8 @@
                     </h:inputText>
                     <h:outputLabel value="#{bundle.EditAlunoLabel_laudado}" for="laudado"  class="control-label"/>
                     <h:selectOneRadio id="laudado" value="#{alunoBean.selected.laudado}" title="#{bundle.EditAlunoTitle_laudado}" style="width:100px">
-                        <f:selectItem itemLabel="Não" itemValue="false" class="radio-inline" />
-                        <f:selectItem itemLabel="Sim" itemValue="true" class="radio-inline" />
+                        <f:selectItem itemLabel="Não" itemValue="false" styleClass="radio-inline" />
+                        <f:selectItem itemLabel="Sim" itemValue="true" styleClass="radio-inline" />
                     </h:selectOneRadio>
                     <h:outputLabel value="#{bundle.EditAlunoLabel_situacao}" for="situacao"  class="control-label"/>
                     <h:selectOneMenu id="situacao" value="#{alunoBean.selected.situacao}" title="#{bundle.EditAlunoTitle_situacao}" class="form-control" >

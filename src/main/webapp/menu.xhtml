@@ -14,19 +14,18 @@
                     <h:form>
                         <!-- sidebar menu start-->
                         <ul class="sidebar-menu" id="nav-accordion">
-
-                            <p class="centered"><a href="profile.html"><img src="../resources/img/ui-sam.jpg" class="img-circle" width="60"></img></a></p>
+                            <br/>
                             <h5 class="centered">#{loginBean.logado.nome}</h5>
 
                             <li class="mt">
-                                <a class="active" href="index.html">
+                                <a href="../index.xhtml">
                                     <i class="fa fa-dashboard"></i>
                                     <span>Dashboard</span>
                                 </a>
                             </li>
                             <h:panelGroup rendered="#{loginBean.logado.tipo == 'D' || loginBean.logado.tipo == 'S'}" >
                                 <li class="sub-menu">
-                                    <a href="javascript:;" >
+                                    <a href="javascript:;" id="aluno_menu" >
                                         <i class="fa fa-user"></i>
                                         <span>Alunos</span>
                                     </a>
@@ -37,7 +36,7 @@
                                     </ul>
                                 </li>
                                 <li class="sub-menu">
-                                    <a href="javascript:;" >
+                                    <a href="javascript:;" id="ano_menu" >
                                         <i class="fa fa-calendar-o"></i>
                                         <span>Anos</span>
                                     </a>
@@ -47,7 +46,7 @@
                                     </ul>
                                 </li>
                                 <li class="sub-menu">
-                                    <a href="javascript:;" >
+                                    <a href="javascript:;" id="disciplina_menu" >
                                         <i class="fa fa-book"></i>
                                         <span>Disciplinas</span>
                                     </a>
@@ -58,7 +57,7 @@
                                     </ul>
                                 </li>
                                 <li class="sub-menu">
-                                    <a href="javascript:;" >
+                                    <a href="javascript:;" id="professor_menu" >
                                         <i class="fa fa-graduation-cap"></i>
                                         <span>Professores</span>
                                     </a>
@@ -69,7 +68,7 @@
                                     </ul>
                                 </li>
                                 <li class="sub-menu">
-                                    <a href="javascript:;" >
+                                    <a href="javascript:;" id="turma_menu" >
                                         <i class="fa fa-users"></i>
                                         <span>Turmas</span>
                                     </a>
@@ -81,13 +80,13 @@
                             </h:panelGroup>  
                             <h:panelGroup rendered="#{loginBean.logado.tipo != null}" >
                                 <li class="sub-menu">
-                                    <a href="javascript:;" >
+                                    <a href="javascript:;" id="boletim_menu" >
                                         <i class="fa fa-table"></i>
                                         <span>Boletim</span>
                                     </a>
                                     <ul class="sub">
-                                        <li><h:link outcome="/boletim/mockup_notas" value="Digitar Notas"/></li>
-                                        <li><h:commandLink action="#{anoController.prepareCreate}" value="Gerar Boletins"/></li>
+                                        <li><h:link outcome="/boletim/digitar_notas" value="Digitar Notas"/></li>
+                                        <li><h:link outcome="/boletim/gerar_boletim" value="Gerar Boletim"/></li>
                                     </ul>
                                 </li>
                             </h:panelGroup>

@@ -1,11 +1,13 @@
 package com.castanheira.escola.jsf;
 
+import com.castanheira.escola.jpa.entities.Boletim;
 import com.castanheira.escola.jpa.entities.Matricula;
 import com.castanheira.escola.jsf.controller.BoletimRN;
 import com.castanheira.escola.jsf.util.JsfUtil;
 import com.castanheira.escola.jsf.util.PaginationHelper;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -212,12 +214,14 @@ public class MatriculaBean implements Serializable {
     public Matricula getMatricula(java.lang.Long id) {
         return ejbFacade.find(id);
     }
+    
+    public String getStatusAprovacao(Matricula m){
+        return ejbBoletimRN.verificarAprovacaoRelatorio((List<Boletim>)m.getBoletimCollection());
+    }
 
     public SelectItem[] getListaTurmas() {
         return listaTurmas;
     }
-    
-
 
     @FacesConverter(forClass = Matricula.class)
     public static class MatriculaBeanConverter implements Converter {

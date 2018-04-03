@@ -14,14 +14,14 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     
-	<repositories>
-		<repository>
-			<id>prime-repo</id>
-			<name>PrimeFaces Maven Repository</name>
-			<url>http://repository.primefaces.org</url>
-			<layout>default</layout>
-		</repository>
-	</repositories>
+    <repositories>
+        <repository>
+            <id>prime-repo</id>
+            <name>PrimeFaces Maven Repository</name>
+            <url>http://repository.primefaces.org</url>
+            <layout>default</layout>
+        </repository>
+    </repositories>
     
     <dependencies>
         <dependency>
@@ -49,15 +49,15 @@
         </dependency>
         <!-- Faces Implementation -->
         <dependency>
-                <groupId>com.sun.faces</groupId>
-                <artifactId>jsf-impl</artifactId>
-                <version>2.2.4</version>
+            <groupId>com.sun.faces</groupId>
+            <artifactId>jsf-impl</artifactId>
+            <version>2.2.4</version>
         </dependency>
         <!-- Faces Library -->
         <dependency>
-                <groupId>com.sun.faces</groupId>
-                <artifactId>jsf-api</artifactId>
-                <version>2.2.4</version>
+            <groupId>com.sun.faces</groupId>
+            <artifactId>jsf-api</artifactId>
+            <version>2.2.4</version>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>

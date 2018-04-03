@@ -11,6 +11,9 @@
             <h:outputText value="#{bundle.CreateMatriculaTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
+            <script>
+                document.getElementById("aluno_menu").className = "active";
+            </script>
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>

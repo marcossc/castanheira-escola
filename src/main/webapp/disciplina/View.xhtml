@@ -10,6 +10,9 @@
             <h:outputText value="#{bundle.ViewDisciplinaTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
+            <script>
+                document.getElementById("disciplina_menu").className = "active";
+            </script>
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>

@@ -21,6 +21,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -35,6 +36,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Matricula.findAll", query = "SELECT m FROM Matricula m")
     , @NamedQuery(name = "Matricula.findById", query = "SELECT m FROM Matricula m WHERE m.id = :id")
+    , @NamedQuery(name = "Matricula.findByIdAlunoTurma", query = "SELECT m FROM Matricula m WHERE m.idAluno.id = :idAluno"
+            + " and m.idTurma.id = :idTurma")
     , @NamedQuery(name = "Matricula.findByAprovado", query = "SELECT m FROM Matricula m WHERE m.aprovado = :aprovado")})
 public class Matricula implements Serializable {
 
@@ -56,6 +59,9 @@ public class Matricula implements Serializable {
     private Turma idTurma;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMatricula")
     private Collection<Boletim> boletimCollection;
+    
+    @Transient
+    private String statusAprovacao;
 
     public Matricula() {
     }
@@ -81,6 +87,14 @@ public class Matricula implements Serializable {
             return "Sim";
         else
             return "Não";
+    }
+
+    public String getStatusAprovacao() {
+        return statusAprovacao;
+    }
+
+    public void setStatusAprovacao(String statusAprovacao) {
+        this.statusAprovacao = statusAprovacao;
     }
 
     public void setAprovado(Boolean aprovado) {
