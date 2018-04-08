@@ -44,12 +44,6 @@
                         <h:dataTable id="listAlunoTable" value="#{alunoBean.items}" var="item" styleClass="table table-striped table-advance table-hover">
                             <h:column>
                                 <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListAlunoTitle_id}"/>
-                                </f:facet>
-                                <h:outputText value="#{item.id}"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
                                     <h:outputText value="#{bundle.ListAlunoTitle_nome}"/>
                                 </f:facet>
                                 <h:outputText value="#{item.nome}"/>

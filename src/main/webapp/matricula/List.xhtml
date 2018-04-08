@@ -34,7 +34,7 @@
                                 <f:facet name="header">
                                     <h:outputText value="#{bundle.ListMatriculaTitle_aprovado}"/>
                                 </f:facet>
-                                <h:outputText value="#{matriculaBean.getStatusAprovacao(item)}"/>
+                                <h:outputText value="#{matriculaBean.getStatusAprovacao(item.idAluno.id)}"/>
                             </h:column>
                             <h:column>
                                 <f:facet name="header">

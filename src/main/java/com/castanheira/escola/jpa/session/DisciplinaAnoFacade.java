@@ -95,7 +95,6 @@ public class DisciplinaAnoFacade extends AbstractFacade<DisciplinaAno> {
         return ((Long) q.getSingleResult()).intValue();
     }
     
-    @Override
     public List<DisciplinaAno> findByAno(int ano) {
         return em.createNamedQuery("DisciplinaAno.findByAno").setParameter("ano", ano).getResultList();
     }

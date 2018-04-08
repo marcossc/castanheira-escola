@@ -39,12 +39,6 @@
                         <h:dataTable value="#{professorBean.items}" var="item" styleClass="table table-striped table-advance table-hover" id="listProfessoresTable">
                             <h:column>
                                 <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListProfessorTitle_id}"/>
-                                </f:facet>
-                                <h:outputText value="#{item.id}"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
                                     <h:outputText value="#{bundle.ListProfessorTitle_nome}"/>
                                 </f:facet>
                                 <h:outputText value="#{item.nome}"/>
@@ -60,12 +54,6 @@
                                     <h:outputText value="#{bundle.ListProfessorTitle_usuario}"/>
                                 </f:facet>
                                 <h:outputText value="#{item.usuario}"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListProfessorTitle_senha}"/>
-                                </f:facet>
-                                <h:outputText value="#{item.senha}"/>
                             </h:column>
                             <h:column>
                                 <f:facet name="header">

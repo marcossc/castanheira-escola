@@ -27,7 +27,7 @@
                     <h:outputLabel value="#{bundle.EditProfessorLabel_usuario}" for="usuario" class="control-label" />
                     <h:inputText id="usuario" value="#{professorBean.selected.usuario}" title="#{bundle.EditProfessorTitle_usuario}" required="true" requiredMessage="#{bundle.EditProfessorRequiredMessage_usuario}" class="form-control"/>
                     <h:outputLabel value="#{bundle.EditProfessorLabel_senha}" for="senha" class="control-label" />
-                    <h:inputText id="senha" value="#{professorBean.selected.senha}" title="#{bundle.EditProfessorTitle_senha}" required="true" requiredMessage="#{bundle.EditProfessorRequiredMessage_senha}" class="form-control"/>
+                    <h:inputSecret id="senha" value="#{professorBean.selected.senha}" title="#{bundle.EditProfessorTitle_senha}" required="true" requiredMessage="#{bundle.EditProfessorRequiredMessage_senha}" class="form-control"/>
                     <h:outputLabel value="#{bundle.EditProfessorLabel_tipo}" for="tipo" class="control-label" />
                     <h:selectOneMenu id="tipo" value="#{professorBean.selected.tipo}" title="#{bundle.EditProfessorTitle_tipo}" class="form-control">
                         <f:selectItem itemLabel="Direção/Supervisão" itemValue="D"/>

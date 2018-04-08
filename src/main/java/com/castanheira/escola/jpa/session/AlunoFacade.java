@@ -82,4 +82,9 @@ public class AlunoFacade extends AbstractFacade<Aluno> {
                 .setParameter("idTurma", idTurma).getResultList();
     }
     
+    public List<Aluno> findAlunoAno(int idAno) {
+        return em.createQuery("SELECT a FROM Aluno a WHERE a.idAno.id = :idAno order by a.nome")
+                .setParameter("idAno", idAno).getResultList();
+    }
+    
 }

@@ -3,6 +3,7 @@ package com.castanheira.escola.jsf;
 import com.castanheira.escola.jpa.entities.Boletim;
 import com.castanheira.escola.jpa.entities.Matricula;
 import com.castanheira.escola.jsf.controller.BoletimRN;
+import com.castanheira.escola.jsf.controller.MatriculaRN;
 import com.castanheira.escola.jsf.util.JsfUtil;
 import com.castanheira.escola.jsf.util.PaginationHelper;
 
@@ -28,16 +29,19 @@ public class MatriculaBean implements Serializable {
     private DataModel items = null;
     @EJB
     private com.castanheira.escola.jpa.session.MatriculaFacade ejbFacade;
-    
+    @EJB
+    private com.castanheira.escola.jpa.session.BoletimFacade ejbBoletimFacade;    
     @EJB
     private com.castanheira.escola.jpa.session.TurmaFacade turmaFacade;
     @EJB
     private com.castanheira.escola.jpa.session.AlunoFacade alunoFacade;
     @EJB
+    private MatriculaRN ejbMatriculaRN;
+    @EJB
     private BoletimRN ejbBoletimRN;
-
     
     private SelectItem[] listaTurmas;
+    private SelectItem[] listaAluno;
     
     private PaginationHelper pagination;
     private int selectedItemIndex;
@@ -59,12 +63,12 @@ public class MatriculaBean implements Serializable {
 
                 @Override
                 public int getItemsCount() {
-                    return ejbFacade.count();
+                    return ejbFacade.countFiltro();
                 }
 
                 @Override
                 public DataModel createPageDataModel() {
-                    return new ListDataModel(ejbFacade.findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
+                    return new ListDataModel(ejbFacade.findRangeFiltro(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
                 }
             };
         }
@@ -73,28 +77,35 @@ public class MatriculaBean implements Serializable {
 
     public String prepareList() {
         recreateModel();
-        return "List";
+        return "List?faces-redirect=true";
     }
 
     public String prepareView() {
         current = (Matricula) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        return "View";
+        return "View?faces-redirect=true";
     }
 
     public String prepareCreate() {
         current = new Matricula();
         selectedItemIndex = -1;
+        listaTurmas = JsfUtil.getSelectItems(turmaFacade.findAll(), true);
+        listaAluno = null;
         return "Create";
     }
 
-    public String create() {
+     public String create() {
         try {
-            current = ejbFacade.createMatricula(current);
-            //Criar boletim
-            ejbBoletimRN.criarBoletim(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/resources/Bundle").getString("MatriculaCreated"));
-            return prepareCreate();
+            if (!ejbFacade.findMatriculaAluno(current.getIdAluno().getId())) {
+                //ejbMatriculaRN.salvarMatriculaAluno(current);
+                current = ejbFacade.createMatricula(current);
+                ejbBoletimRN.criarBoletim(current);
+                JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/resources/Bundle").getString("MatriculaCreated"));
+                return prepareCreate();
+            }else {
+                JsfUtil.addErrorMessage(ResourceBundle.getBundle("/resources/Bundle").getString("MatriculaExists"));
+                return null;
+            }
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/resources/Bundle").getString("PersistenceErrorOccured"));
             return null;
@@ -191,6 +202,7 @@ public class MatriculaBean implements Serializable {
         return "List";
     }
     
+    /*
     public SelectItem[] getItemsAlunoAvailableSelectOne() {
         return JsfUtil.getSelectItems(alunoFacade.findAll(), true);
     }
@@ -199,8 +211,14 @@ public class MatriculaBean implements Serializable {
         return JsfUtil.getSelectItems(turmaFacade.findAll(), true);
     }
     
+    
     public void getTurmaAvailable() {
         listaTurmas = JsfUtil.getSelectItems(turmaFacade.findByAno(current.getIdAluno().getIdAno().getId()), true);
+    }
+    */
+    
+    public void getAlunosAno(){
+        listaAluno = JsfUtil.getSelectItems(alunoFacade.findAlunoAno(current.getIdTurma().getIdAno().getId()), true);
     }
 
     public SelectItem[] getItemsAvailableSelectMany() {
@@ -215,13 +233,24 @@ public class MatriculaBean implements Serializable {
         return ejbFacade.find(id);
     }
     
-    public String getStatusAprovacao(Matricula m){
-        return ejbBoletimRN.verificarAprovacaoRelatorio((List<Boletim>)m.getBoletimCollection());
+    public String getStatusAprovacao(Long idAluno){
+        List<Boletim> listaBoletimAluno = ejbBoletimFacade.getBoletimAluno(idAluno);
+        return ejbBoletimRN.verificarAprovacaoRelatorio(listaBoletimAluno);
     }
 
     public SelectItem[] getListaTurmas() {
         return listaTurmas;
     }
+
+    public SelectItem[] getListaAluno() {
+        return listaAluno;
+    }
+
+    public void setListaAluno(SelectItem[] listaAluno) {
+        this.listaAluno = listaAluno;
+    }
+
+    
 
     @FacesConverter(forClass = Matricula.class)
     public static class MatriculaBeanConverter implements Converter {

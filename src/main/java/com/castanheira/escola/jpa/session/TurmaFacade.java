@@ -6,6 +6,7 @@
 package com.castanheira.escola.jpa.session;
 
 import com.castanheira.escola.jpa.entities.Turma;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,6 +28,10 @@ public class TurmaFacade extends AbstractFacade<Turma> {
 
     public TurmaFacade() {
         super(Turma.class);
+    }
+    
+    public List<Turma> findByAno(int ano) {
+        return em.createNamedQuery("Turma.findByAno").setParameter("ano", ano).getResultList();
     }
     
 }

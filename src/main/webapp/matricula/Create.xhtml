@@ -11,7 +11,7 @@
             <h:outputText value="#{bundle.CreateMatriculaTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
-            <script>
+			<script>
                 document.getElementById("aluno_menu").className = "active";
             </script>
             <h:panelGroup id="messagePanel" layout="block">
@@ -19,16 +19,21 @@
             </h:panelGroup>
             <h:form class="form-horizontal style-form">
                 <h:panelGrid columns="2" columnClasses="firstColumn,secondColumn">
-                    <h:outputLabel value="#{bundle.CreateMatriculaLabel_idAluno}" for="idAluno" class="control-label" />
-                    <h:selectOneMenu id="idAluno" value="#{matriculaBean.selected.idAluno}" title="#{bundle.CreateMatriculaTitle_idAluno}" class="form-control" >
-                        <f:selectItems value="#{matriculaBean.itemsAlunoAvailableSelectOne}"/>
-                        <p:ajax update="idTurma" event="change" process="@this" listener="#{matriculaBean.getTurmaAvailable()}"></p:ajax>
-                    </h:selectOneMenu>
+                    
                     <h:outputLabel value="#{bundle.CreateMatriculaLabel_idTurma}" for="idTurma" class="control-label" />
                     <h:selectOneMenu id="idTurma" value="#{matriculaBean.selected.idTurma}" 
-                                     title="#{bundle.CreateMatriculaTitle_idTurma}" class="form-control"
-                                     disabled="#{matriculaBean.selected.idAluno eq null}">
+                                     title="#{bundle.CreateMatriculaTitle_idTurma}" class="form-control">
                         <f:selectItems value="#{matriculaBean.listaTurmas}"/>
+                        <p:ajax update="idAluno" event="change" process="@this" listener="#{matriculaBean.getAlunosAno()}"></p:ajax>
+                    </h:selectOneMenu>
+                    
+                    
+                    <h:outputLabel value="#{bundle.CreateMatriculaLabel_idAluno}" for="idAluno" class="control-label" />
+                    <h:selectOneMenu id="idAluno" value="#{matriculaBean.selected.idAluno}" 
+                                     title="#{bundle.CreateMatriculaTitle_idAluno}" class="form-control"
+                                     disabled="#{matriculaBean.selected.idTurma eq null}">
+                        <f:selectItems value="#{matriculaBean.listaAluno}"/>
+                        <p:ajax event="change" process="@this" />
                     </h:selectOneMenu>
                 </h:panelGrid>
                 <br />

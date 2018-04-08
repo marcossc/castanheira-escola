@@ -140,14 +140,15 @@ public class BoletimBean implements Serializable {
                         continue;
                     }
 
-                    Matricula matriculaAluno = ejbMatriculaFacade.findMatriculaAlunoTurma(aluno.getId(), turmaGerarBoletim.getId());
+                    //Matricula matriculaAluno = ejbMatriculaFacade.findMatriculaAlunoTurma(aluno.getId(), turmaGerarBoletim.getId());
+                    List<Boletim> listBoletim = ejbFacade.getBoletimAluno(aluno.getId());
 
-                    if (matriculaAluno.getBoletimCollection().size() > 0) {
-                        String statusAprovacao = ejbBoletimRN.verificarAprovacaoRelatorio((List<Boletim>)matriculaAluno.getBoletimCollection());
-                        for (Boletim boletim : matriculaAluno.getBoletimCollection()) {
+                    if (listBoletim.size() > 0) {
+                        String statusAprovacao = ejbBoletimRN.verificarAprovacaoRelatorio(listBoletim);
+                        for (Boletim boletim : listBoletim) {
                             boletim.getIdMatricula().setStatusAprovacao(statusAprovacao);
                         }
-                        JasperPrint print = JasperFillManager.fillReport(jasperFile, null, new JRBeanCollectionDataSource(matriculaAluno.getBoletimCollection()));
+                        JasperPrint print = JasperFillManager.fillReport(jasperFile, null, new JRBeanCollectionDataSource(listBoletim));
                         jasperPrintList.add (print);
                     }
                 }

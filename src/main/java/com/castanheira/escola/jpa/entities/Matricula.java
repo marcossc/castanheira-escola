@@ -34,10 +34,11 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "matricula")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Matricula.findAll", query = "SELECT m FROM Matricula m")
+    @NamedQuery(name = "Matricula.findAll", query = "SELECT m FROM Matricula m order by m.idAluno.nome")
     , @NamedQuery(name = "Matricula.findById", query = "SELECT m FROM Matricula m WHERE m.id = :id")
     , @NamedQuery(name = "Matricula.findByIdAlunoTurma", query = "SELECT m FROM Matricula m WHERE m.idAluno.id = :idAluno"
             + " and m.idTurma.id = :idTurma")
+    , @NamedQuery(name = "Matricula.findByIdAluno", query = "SELECT m FROM Matricula m WHERE m.idAluno.id = :idAluno")
     , @NamedQuery(name = "Matricula.findByAprovado", query = "SELECT m FROM Matricula m WHERE m.aprovado = :aprovado")})
 public class Matricula implements Serializable {
 

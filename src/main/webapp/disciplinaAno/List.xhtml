@@ -50,12 +50,6 @@
                         <h:dataTable id="listaDisciplinaAno" value="#{disciplinaAnoBean.items}" var="item" styleClass="table table-striped table-advance table-hover">
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListDisciplinaAnoTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDisciplinaAnoTitle_idAno}"/>
                             </f:facet>
                             <h:outputText value="#{item.idAnoString}"/>

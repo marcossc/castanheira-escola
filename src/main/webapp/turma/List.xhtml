@@ -26,12 +26,6 @@
                         <h:dataTable value="#{turmaBean.items}" var="item" styleClass="table table-striped table-advance table-hover">
                             <h:column>
                                 <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListTurmaTitle_id}"/>
-                                </f:facet>
-                                <h:outputText value="#{item.id}"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
                                     <h:outputText value="#{bundle.ListTurmaTitle_nome}"/>
                                 </f:facet>
                                 <h:outputText value="#{item.nome}"/>

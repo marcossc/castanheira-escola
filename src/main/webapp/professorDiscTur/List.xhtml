@@ -55,12 +55,6 @@
                         <h:dataTable value="#{professorDiscTurBean.items}" var="item" styleClass="table table-striped table-advance table-hover" id="listaProfessorDiscTurma">
                             <h:column>
                                 <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListProfessorDiscTurTitle_id}"/>
-                                </f:facet>
-                                <h:outputText value="#{item.id}"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
                                     <h:outputText value="#{bundle.ListProfessorDiscTurTitle_idDisciplina}"/>
                                 </f:facet>
                                 <h:outputText value="#{item.idDisciplina.nome}"/>
