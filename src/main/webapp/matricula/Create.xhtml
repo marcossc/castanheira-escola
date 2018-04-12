@@ -24,17 +24,17 @@
                     <h:selectOneMenu id="idTurma" value="#{matriculaBean.selected.idTurma}" 
                                      title="#{bundle.CreateMatriculaTitle_idTurma}" class="form-control">
                         <f:selectItems value="#{matriculaBean.listaTurmas}"/>
-                        <p:ajax update="idAluno" event="change" process="@this" listener="#{matriculaBean.getAlunosAno()}"></p:ajax>
+                        <p:ajax update="idAluno, messagePanel" event="change" process="@this" listener="#{matriculaBean.getAlunosAno()}"></p:ajax>
                     </h:selectOneMenu>
                     
                     
                     <h:outputLabel value="#{bundle.CreateMatriculaLabel_idAluno}" for="idAluno" class="control-label" />
-                    <h:selectOneMenu id="idAluno" value="#{matriculaBean.selected.idAluno}" 
+                    <h:selectManyMenu id="idAluno" value="#{matriculaBean.listaAlunoSelecao}" 
                                      title="#{bundle.CreateMatriculaTitle_idAluno}" class="form-control"
-                                     disabled="#{matriculaBean.selected.idTurma eq null}">
+                                     disabled="#{matriculaBean.selected.idTurma eq null}" style="height:200px" converter="alunoConverter">
                         <f:selectItems value="#{matriculaBean.listaAluno}"/>
                         <p:ajax event="change" process="@this" />
-                    </h:selectOneMenu>
+                    </h:selectManyMenu>
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{matriculaBean.create}" value="#{bundle.CreateMatriculaSaveLink}" class="btn btn-primary" />

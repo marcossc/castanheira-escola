@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
@@ -37,9 +38,9 @@
                             </span>
                         </label>
 
-                        <h:commandLink action="#{loginBean.login}" styleClass="btn btn-theme btn-block">
+                        <button type="submit" jsf:action="#{loginBean.login}" class="btn btn-theme btn-block" >
                             <i class="fa fa-lock"></i> ENTRAR
-                        </h:commandLink>
+                        </button>
 
                         <hr />
 

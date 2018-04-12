@@ -5,15 +5,23 @@
  */
 package com.castanheira.escola.jsf.entities;
 
+import java.io.Serializable;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
+
 /**
  *
  * @author mscas
  */
-
-public class Login {
-            
+@Named
+@SessionScoped
+public class Login implements Serializable {
+        
+        private static final long serialVersionUID = 1L;
         private String usuario;
         private String senha;
+        private boolean logado;
+        private String perfil;
 
     public Login(String usuario, String senha) {
         this.usuario = usuario;
@@ -38,6 +46,19 @@ public class Login {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-        
-        
+
+    public boolean isLogado() {
+        return logado;
+    }
+
+    public void setLogado(boolean logado) {
+        this.logado = logado;
+    }
+    public String getPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(String perfil) {
+        this.perfil = perfil;
+    }   
 }

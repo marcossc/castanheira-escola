@@ -18,10 +18,12 @@
                             <h5 class="centered">#{loginBean.logado.nome}</h5>
 
                             <li class="mt">
-                                <a href="../index.xhtml">
-                                    <i class="fa fa-dashboard"></i>
-                                    <span>Dashboard</span>
-                                </a>
+                                <h:link outcome="/index">
+                                    <h:outputText>
+                                        <i class="fa fa-dashboard"></i>
+                                        <span>Dashboard</span>
+                                    </h:outputText>
+                                </h:link>
                             </li>
                             <h:panelGroup rendered="#{loginBean.logado.tipo == 'D' || loginBean.logado.tipo == 'S'}" >
                                 <li class="sub-menu">

@@ -14,6 +14,7 @@ import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.inject.Inject;
 
 
 /**
@@ -29,6 +30,9 @@ public class LoginBean implements Serializable {
     private ProfessorFacade professorFacade;
     private Professor professor = new Professor();
     
+    @Inject 
+    private Login usuarioLogin;
+    
 
     public String login() {
 
@@ -38,14 +42,24 @@ public class LoginBean implements Serializable {
             FacesUtil.addErrorMessage("Usuário/senha inválidos!");
             return null;
         } else {
+            usuarioLogin.setUsuario(professor.getUsuario());
+            usuarioLogin.setLogado(true);
+            usuarioLogin.setPerfil(professor.getTipoString());
             SessionUtil.setParam("usuario", professor);
             return "/index";
         }
     }
     
     public String logout() {
+        limparDadosUsuario();
         SessionUtil.remove("usuario");
         return "/login";
+    }
+    
+    public void limparDadosUsuario() {
+        usuarioLogin.setUsuario(null);
+        usuarioLogin.setLogado(false);
+        usuarioLogin.setPerfil(null);    
     }
     
     public Professor getLogado(){

@@ -11,14 +11,16 @@ public class MatriculaRN implements Serializable {
     
     @Inject
     private MatriculaFacade matriculaFacade;
-    /*@Inject
-    private BoletimRN boletimRN;
+    //@Inject
+    //private BoletimRN boletimRN;
     
+    /*
     public void salvarMatriculaAluno(Matricula matricula){
         matricula = matriculaFacade.createMatricula(matricula);
         boletimRN.criarBoletim(matricula);
     }
     */
+    
     public void atualizarStatusMatricula(Long id, boolean status) {
         Matricula matricula = matriculaFacade.find(id);
         matricula.setAprovado(status);
