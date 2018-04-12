@@ -123,7 +123,7 @@ public class ProfessorDiscTurBean implements Serializable {
         try {
             ejbFacade.edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/resources/Bundle").getString("ProfessorDiscTurUpdated"));
-            return "View";
+            return "List";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/resources/Bundle").getString("PersistenceErrorOccured"));
             return null;
