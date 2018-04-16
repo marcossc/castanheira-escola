@@ -125,7 +125,7 @@
 			</textField>
 			<image>
 				<reportElement x="0" y="0" width="50" height="50" uuid="661dabb5-66bd-437b-81c0-1abbf98df661"/>
-				<imageExpression><![CDATA["http://localhost:8080/castanheira-escola-master/faces/resources/relatorio/logo_dom_pedro.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["http://localhost:8080/Escola_novo/faces/resources/relatorio/logo_dom_pedro.jpg"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="420" y="19" width="100" height="30" uuid="dfdb566a-c407-4bc0-abc1-eea3028aebf7"/>

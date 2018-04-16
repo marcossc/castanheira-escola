@@ -1,5 +1,6 @@
 package com.castanheira.escola.jsf;
 
+import com.castanheira.escola.jpa.entities.Ano;
 import com.castanheira.escola.jpa.entities.Disciplina;
 import com.castanheira.escola.jpa.entities.DisciplinaAno;
 import com.castanheira.escola.jpa.entities.Turma;
@@ -26,7 +27,7 @@ public class DisciplinaAnoBean implements Serializable {
 
     private DisciplinaAno current;
     private DataModel items = null;
-    private List<Turma> listaTurmas;
+    private List<Ano> listaAno;
     private List<Disciplina> listaDisciplina;
     private Integer idAnoFiltro;
     private Integer idDisciplinaFiltro;
@@ -37,6 +38,8 @@ public class DisciplinaAnoBean implements Serializable {
     private com.castanheira.escola.jpa.session.TurmaFacade ejbTurmaFacade;
     @EJB
     private com.castanheira.escola.jpa.session.DisciplinaFacade ejbDisciplinaFacade;
+    @EJB
+    private com.castanheira.escola.jpa.session.AnoFacade ejbanoFacade;
     
     private PaginationHelper pagination;
     private int selectedItemIndex;
@@ -53,7 +56,7 @@ public class DisciplinaAnoBean implements Serializable {
     }
 
     public void configuracoesTelaPesquisa(){
-        listaTurmas = ejbTurmaFacade.findAll();
+        listaAno = ejbanoFacade.findAll();
         listaDisciplina = ejbDisciplinaFacade.findAll();
         idAnoFiltro = null;
         idDisciplinaFiltro = null;
@@ -212,12 +215,12 @@ public class DisciplinaAnoBean implements Serializable {
         return ejbFacade.find(id);
     }
 
-    public List<Turma> getListaTurmas() {
-        return listaTurmas;
+    public List<Ano> getListaAno() {
+        return listaAno;
     }
 
-    public void setListaTurmas(List<Turma> listaTurmas) {
-        this.listaTurmas = listaTurmas;
+    public void setListaAno(List<Ano> listaAno) {
+        this.listaAno = listaAno;
     }
 
     public List<Disciplina> getListaDisciplina() {
