@@ -20,8 +20,8 @@
                 <h:outputText escape="false" value="#{bundle.ListAnoEmpty}" rendered="#{anoBean.items.rowCount == 0}"/>
                 <h:panelGroup rendered="#{anoBean.items.rowCount > 0}">
                     <h:outputText value="#{anoBean.pagination.pageFirstItem + 1} a #{anoBean.pagination.pageLastItem + 1} de #{anoBean.pagination.itemsCount}"/>&nbsp;
-                    <h:commandLink action="#{anoBean.previous}" value="#{bundle.Previous} #{anoBean.pagination.pageSize}" rendered="#{anoBean.pagination.hasPreviousPage}"/>&nbsp;
-                    <h:commandLink action="#{anoBean.next}" value="#{bundle.Next} #{anoBean.pagination.pageSize}" rendered="#{anoBean.pagination.hasNextPage}"/>&nbsp;
+                    <h:commandLink action="#{anoBean.previous}" value="#{anoBean.pagination.pageSize} #{bundle.Previous}" rendered="#{anoBean.pagination.hasPreviousPage}" class="btn btn-default btn-xs"/>&nbsp;
+                    <h:commandLink action="#{anoBean.next}" value="#{bundle.Next} #{anoBean.pagination.pageSize}" rendered="#{anoBean.pagination.hasNextPage}" class="btn btn-default btn-xs"/>&nbsp;
                     <div class="content-panel">
                         <h:dataTable value="#{anoBean.items}" var="item" styleClass="table table-striped table-advance table-hover">
                             <h:column>

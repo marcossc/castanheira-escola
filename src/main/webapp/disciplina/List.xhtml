@@ -20,8 +20,8 @@
                 <h:outputText escape="false" value="#{bundle.ListDisciplinaEmpty}" rendered="#{disciplinaBean.items.rowCount == 0}"/>
                 <h:panelGroup rendered="#{disciplinaBean.items.rowCount > 0}">
                     <h:outputText value="#{disciplinaBean.pagination.pageFirstItem + 1} a #{disciplinaBean.pagination.pageLastItem + 1} de #{disciplinaBean.pagination.itemsCount}"/>&nbsp;
-                    <h:commandLink action="#{disciplinaBean.previous}" value="#{bundle.Previous} #{disciplinaBean.pagination.pageSize}" rendered="#{disciplinaBean.pagination.hasPreviousPage}"/>&nbsp;
-                    <h:commandLink action="#{disciplinaBean.next}" value="#{bundle.Next} #{disciplinaBean.pagination.pageSize}" rendered="#{disciplinaBean.pagination.hasNextPage}"/>&nbsp;
+                    <h:commandLink action="#{disciplinaBean.previous}" value="#{disciplinaBean.pagination.pageSize} #{bundle.Previous}" rendered="#{disciplinaBean.pagination.hasPreviousPage}" class="btn btn-default btn-xs"/>&nbsp;
+                    <h:commandLink action="#{disciplinaBean.next}" value="#{bundle.Next} #{disciplinaBean.pagination.pageSize}" rendered="#{disciplinaBean.pagination.hasNextPage}" class="btn btn-default btn-xs"/>&nbsp;
                     <div class="content-panel">
                         <h:dataTable value="#{disciplinaBean.items}" var="item" styleClass="table table-striped table-advance table-hover">
                             <h:column>

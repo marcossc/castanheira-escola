@@ -20,8 +20,8 @@
                 <h:outputText escape="false" value="#{bundle.ListMatriculaEmpty}" rendered="#{matriculaBean.items.rowCount == 0}"/>
                 <h:panelGroup rendered="#{matriculaBean.items.rowCount > 0}">
                     <h:outputText value="#{matriculaBean.pagination.pageFirstItem + 1} a #{matriculaBean.pagination.pageLastItem + 1} de #{matriculaBean.pagination.itemsCount}"/>&nbsp;
-                    <h:commandLink action="#{matriculaBean.previous}" value="#{bundle.Previous} #{matriculaBean.pagination.pageSize}" rendered="#{matriculaBean.pagination.hasPreviousPage}"/>&nbsp;
-                    <h:commandLink action="#{matriculaBean.next}" value="#{bundle.Next} #{matriculaBean.pagination.pageSize}" rendered="#{matriculaBean.pagination.hasNextPage}"/>&nbsp;
+                    <h:commandLink action="#{matriculaBean.previous}" value="#{matriculaBean.pagination.pageSize} #{bundle.Previous}" rendered="#{matriculaBean.pagination.hasPreviousPage}" class="btn btn-default btn-xs"/>&nbsp;
+                    <h:commandLink action="#{matriculaBean.next}" value="#{bundle.Next} #{matriculaBean.pagination.pageSize}" rendered="#{matriculaBean.pagination.hasNextPage}" class="btn btn-default btn-xs"/>&nbsp;
                     <div class="content-panel">
                         <h:dataTable value="#{matriculaBean.items}" var="item" styleClass="table table-striped table-advance table-hover">
                             <h:column>

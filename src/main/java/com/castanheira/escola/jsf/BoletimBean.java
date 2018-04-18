@@ -135,8 +135,13 @@ public class BoletimBean implements Serializable {
                 String jasperFile = pathToReportPackage + "\\Boletim.jasper";
                 for (Aluno aluno : listaAluno) {
 
-                    if (idAlunoFiltro != null && 
+                    /*if (idAlunoFiltro != null && 
                             idAlunoFiltro != aluno.getId()) {
+                        continue;
+                    }*/
+                    
+                    if (idAlunoFiltro != null && 
+                            (!idAlunoFiltro.equals(aluno.getId()))) {
                         continue;
                     }
 
@@ -190,7 +195,7 @@ public class BoletimBean implements Serializable {
 
     public PaginationHelper getPagination() {
         if (pagination == null) {
-            pagination = new PaginationHelper(10) {
+            pagination = new PaginationHelper(20) {
 
                 @Override
                 public int getItemsCount() {

@@ -25,8 +25,8 @@
                 <h:panelGroup rendered="#{disciplinaAnoBean.items.rowCount > 0}">
                     <h:panelGroup layout="block" id="divPaginacao">
                         <h:outputText value="#{disciplinaAnoBean.pagination.pageFirstItem + 1} a #{disciplinaAnoBean.pagination.pageLastItem + 1} de #{disciplinaAnoBean.pagination.itemsCount}"/>&nbsp;
-                        <h:commandLink action="#{disciplinaAnoBean.previous}" value="#{bundle.Previous} #{disciplinaAnoBean.pagination.pageSize}" rendered="#{disciplinaAnoBean.pagination.hasPreviousPage}"/>&nbsp;
-                        <h:commandLink action="#{disciplinaAnoBean.next}" value="#{bundle.Next} #{disciplinaAnoBean.pagination.pageSize}" rendered="#{disciplinaAnoBean.pagination.hasNextPage}"/>&nbsp;
+                        <h:commandLink action="#{disciplinaAnoBean.previous}" value="#{disciplinaAnoBean.pagination.pageSize} #{bundle.Previous}" rendered="#{disciplinaAnoBean.pagination.hasPreviousPage}" class="btn btn-default btn-xs"/>&nbsp;
+                        <h:commandLink action="#{disciplinaAnoBean.next}" value="#{bundle.Next} #{disciplinaAnoBean.pagination.pageSize}" rendered="#{disciplinaAnoBean.pagination.hasNextPage}" class="btn btn-default btn-xs"/>&nbsp;
                     </h:panelGroup>
                     <div class="content-panel">
                         <h:panelGroup layout="block" class="col-md-12 text-right">

@@ -20,8 +20,8 @@
                 <h:outputText escape="false" value="#{bundle.ListTurmaEmpty}" rendered="#{turmaBean.items.rowCount == 0}"/>
                 <h:panelGroup rendered="#{turmaBean.items.rowCount > 0}">
                     <h:outputText value="#{turmaBean.pagination.pageFirstItem + 1} a #{turmaBean.pagination.pageLastItem + 1} de #{turmaBean.pagination.itemsCount}"/>&nbsp;
-                    <h:commandLink action="#{turmaBean.previous}" value="#{bundle.Previous} #{turmaBean.pagination.pageSize}" rendered="#{turmaBean.pagination.hasPreviousPage}"/>&nbsp;
-                    <h:commandLink action="#{turmaBean.next}" value="#{bundle.Next} #{turmaBean.pagination.pageSize}" rendered="#{turmaBean.pagination.hasNextPage}"/>&nbsp;
+                    <h:commandLink action="#{turmaBean.previous}" value="#{turmaBean.pagination.pageSize} #{bundle.Previous}" rendered="#{turmaBean.pagination.hasPreviousPage}" class="btn btn-default btn-xs"/>&nbsp;
+                    <h:commandLink action="#{turmaBean.next}" value="#{bundle.Next} #{turmaBean.pagination.pageSize}" rendered="#{turmaBean.pagination.hasNextPage}" class="btn btn-default btn-xs"/>&nbsp;
                     <div class="content-panel">
                         <h:dataTable value="#{turmaBean.items}" var="item" styleClass="table table-striped table-advance table-hover">
                             <h:column>

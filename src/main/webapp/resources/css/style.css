@@ -2247,3 +2247,7 @@ label {
 .secondColumn {
    width: 200px;
 }
+
+.firstColumnBoletim {
+   width: 25%;
+}

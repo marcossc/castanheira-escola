@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
     <ui:composition template="/template_dashgum.xhtml">
         <ui:define name="title">
@@ -28,10 +29,10 @@
                 <h:outputText escape="false" value="#{bundle.ListBoletimEmpty}" rendered="#{boletimBean.items.rowCount == 0}"/>
                 <h:panelGroup rendered="#{boletimBean.items.rowCount > 0}">
                     <h:outputText value="#{boletimBean.pagination.pageFirstItem + 1} a #{boletimBean.pagination.pageLastItem + 1} de #{boletimBean.pagination.itemsCount}"/>&nbsp;
-                    <h:commandLink action="#{boletimBean.previous}" value="#{bundle.Previous} #{boletimBean.pagination.pageSize}" rendered="#{boletimBean.pagination.hasPreviousPage}"/>&nbsp;
-                    <h:commandLink action="#{boletimBean.next}" value="#{bundle.Next} #{boletimBean.pagination.pageSize}" rendered="#{boletimBean.pagination.hasNextPage}"/>&nbsp;
+                    <h:commandLink action="#{boletimBean.previous}" value="#{boletimBean.pagination.pageSize} #{bundle.Previous}" rendered="#{boletimBean.pagination.hasPreviousPage}" class="btn btn-default btn-xs"/>&nbsp;
+                    <h:commandLink action="#{boletimBean.next}" value="#{bundle.Next} #{boletimBean.pagination.pageSize}" rendered="#{boletimBean.pagination.hasNextPage}" class="btn btn-default btn-xs"/>&nbsp;
                     <h:dataTable value="#{boletimBean.items}" var="item" styleClass="table table-striped table-advance table-hover">
-                        <h:column>
+                        <h:column headerClass="firstColumnBoletim">
                             <f:facet name="header">
                                 <h:outputText value="Aluno"/>
                             </f:facet>

@@ -26,7 +26,7 @@
                     <h:panelGroup layout="block" id="divPaginacao">
                     <h:outputText value="#{alunoBean.pagination.pageFirstItem + 1} a #{alunoBean.pagination.pageLastItem + 1} de #{alunoBean.pagination.itemsCount}"/>&nbsp;
                     <br />
-                    <h:commandLink action="#{alunoBean.previous}" value="#{bundle.Previous} #{alunoBean.pagination.pageSize}" rendered="#{alunoBean.pagination.hasPreviousPage}" class="btn btn-default btn-xs"/>&nbsp;
+                    <h:commandLink action="#{alunoBean.previous}" value="#{alunoBean.pagination.pageSize} #{bundle.Previous}" rendered="#{alunoBean.pagination.hasPreviousPage}" class="btn btn-default btn-xs"/>&nbsp;
                     <h:commandLink action="#{alunoBean.next}" value="#{bundle.Next} #{alunoBean.pagination.pageSize}" rendered="#{alunoBean.pagination.hasNextPage}" class="btn btn-default btn-xs"/>&nbsp;
                     </h:panelGroup>
                     <div class="content-panel">
