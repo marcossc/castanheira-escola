@@ -13,15 +13,6 @@
         -->    
         
         <!--  Local teste -->
-        <property name="serverName" value="localhost"/>
-        <property name="portNumber" value="5432"/>
-        <property name="databaseName" value="nova"/>
-        <property name="URL" value="jdbc:postgresql://localhost:5432/nova"/>
-        <property name="User" value="postgres"/>
-        <property name="Password" value="050490"/>
-        <property name="driverClass" value="org.postgresql.Driver"/>
-        
-        <!--  Local quente -->
         <!--
         <property name="serverName" value="localhost"/>
         <property name="portNumber" value="5432"/>
@@ -31,6 +22,27 @@
         <property name="Password" value="050490"/>
         <property name="driverClass" value="org.postgresql.Driver"/>
         -->
+        
+        <!--  Local quente -->
+        <!--
+        <property name="serverName" value="localhost"/>
+        <property name="portNumber" value="5432"/>
+        <property name="databaseName" value="teste"/>
+        <property name="URL" value="jdbc:postgresql://localhost:5432/teste"/>
+        <property name="User" value="postgres"/>
+        <property name="Password" value="050490"/>
+        <property name="driverClass" value="org.postgresql.Driver"/>
+        -->
+        
+        <!--  Integrator -->
+        <property name="serverName" value="localhost"/>
+        <property name="portNumber" value="5432"/>
+        <property name="databaseName" value="escolaon_escola"/>
+        <property name="URL" value="jdbc:postgresql://localhost:5432/escolaon_escola"/>
+        <property name="User" value="escolaonline"/>
+        <property name="Password" value="sQ%yoHs!WyNQ"/>
+        <property name="driverClass" value="org.postgresql.Driver"/>
+        
     </jdbc-connection-pool>
     <jdbc-resource enabled="true" jndi-name="java:app/jdbc/escola" object-type="user" pool-name="post-gre-sql_teste_postgresPool"/>
 </resources>

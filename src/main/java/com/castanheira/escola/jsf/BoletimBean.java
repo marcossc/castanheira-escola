@@ -132,7 +132,7 @@ public class BoletimBean implements Serializable {
                 String pathToReportPackage = servletContext.getRealPath("resources/relatorio");
                 JRPdfExporter PdfExporter = new JRPdfExporter ();
                 List jasperPrintList = new ArrayList ();
-                String jasperFile = pathToReportPackage + "\\Boletim.jasper";
+                String jasperFile = pathToReportPackage + "//Boletim.jasper";
                 for (Aluno aluno : listaAluno) {
 
                     /*if (idAlunoFiltro != null && 
